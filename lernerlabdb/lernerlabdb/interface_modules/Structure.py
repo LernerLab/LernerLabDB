@@ -71,4 +71,4 @@ class Structure:
             str: A string representation of the structure object.
         """
 
-        return f"region = {self.region}, accronym = {self.accronym}, hemisphere = {self.hemisphere}, coordinates = {self.coordinates}"
+        return f"Structure(region = {self.region}, accronym = {self.accronym}, hemisphere = {self.hemisphere}, coordinates = {self.coordinates})"
