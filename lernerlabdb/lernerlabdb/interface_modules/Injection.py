@@ -1,5 +1,6 @@
 from lernerlabdb.interface_modules.Structure import Structure
 from lernerlabdb.interface_modules.Coordinates import Coordinates
+from typing import List, Optional
 
 
 class Injection:
@@ -43,12 +44,12 @@ class Injection:
 
     def __init__(self,
                  injection_number=1,
-                 substrate: str = None,
-                 type: str = None,
+                 substrate: Optional[str] = None,
+                 type: Optional[str] = None,
                  volume: int = 0,
                  flowrate: int = 0,
-                 titer: float = None,
-                 molarity: float = None):
+                 titer: Optional[float] = None,
+                 molarity: Optional[float] = None):
         self.injection_number = injection_number
         # ? do we want the options to be enforced from internal data or user input?
         self.substrate = None if substrate is None else substrate.upper()
