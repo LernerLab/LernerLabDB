@@ -43,6 +43,7 @@ class Implant:
             raise ValueError(
                 f"Invalid type {type}. Must be one of {accepted_types}")
 
+        # ? do we add metrics for the type: ie length, diameter, NA, etc?
         self.type = type
         self.angle = angle
         self.implant_coordinates = None
