@@ -17,4 +17,3 @@ class Coordinates:
             return "Coordinates not logged. Please log coordinates."
         coordinates = {"AP": self.ap, "ML": self.ml, "DV": self.dv}
         return coordinates
-

@@ -1,5 +1,10 @@
 from lernerlabdb.interface_modules.Coordinates import Coordinates
-from pprint import pprint
+from lernerlabdb.interface_modules.Injection import Injection
+from lernerlabdb.interface_modules.Implant import Implant
+
+from typing import Optional, List
+
+# TODO rewrite and expand unit testing
 
 
 class Structure:
@@ -24,7 +29,10 @@ class Structure:
         # Output: region = Cortex, accronym = CTX, hemisphere = Right, coordinates = Coordinates not logged. Please log coordinates.
     """
 
-    def __init__(self, region: str, accronym: str, hemisphere: str, coordinates: tuple = (None, None, None)):
+    def __init__(self, region: str,
+                 accronym: str,
+                 hemisphere: str,
+                 coordinates: tuple = (None, None, None)):
         """
         Initializes a structure object with the given region, acronym, hemisphere, and coordinates.
 
@@ -59,16 +67,60 @@ class Structure:
         self._coordinates = Coordinates(
             coordinates[0], coordinates[1], coordinates[2])
 
+        self._injections = []
+        self._implants = []
+
     @property
     def coordinates(self):
         return self._coordinates.coordinates
 
-    def __repr__(self):
-        """
-        Returns a string representation of the structure object.
+    @property
+    def injections(self):
+        return self._injections
 
-        Returns:
-            str: A string representation of the structure object.
-        """
+    @property
+    def number_of_injections(self):
+        return len(self._injections)
 
-        return f"Structure(region = {self.region}, accronym = {self.accronym}, hemisphere = {self.hemisphere}, coordinates = {self.coordinates})"
+    def add_injection(self, injection: Injection):
+        self._injections.append(injection)
+
+    def remove_injection(self, injection: Injection):
+        self._injections.remove(injection)
+
+    @property
+    def implants(self):
+        return self._implants
+
+    @property
+    def number_of_implants(self):
+        return len(self._implants)
+
+    def add_implant(self, implant: Implant):
+        self._implants.append(implant)
+
+    def remove_implant(self, implant: Implant):
+        self._implants.remove(implant)
+
+    @property
+    def structure_data(self):
+        '''serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__
+            Parameters
+            ----------
+            self : Structure
+                The current instance of the Structure class.
+            Returns
+            -------
+            dict
+                A dictionary containing the structure data with all attached class data.
+
+        '''
+        data = {
+            "region": self.region,
+            "accronym": self.accronym,
+            "hemisphere": self.hemisphere,
+            "coordinates": self.coordinates,
+            "injections": {f"injection_{i+1}": inj.injection_data for i, inj in enumerate(self.injections)},
+            "implants": {f"implant_{i+1}": imp.implant_data for i, imp in enumerate(self.implants) if imp is not None},
+        }
+        return data
