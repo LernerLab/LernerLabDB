@@ -1,4 +1,3 @@
-from lernerlabdb.interface_modules.Structure import Structure
 from lernerlabdb.interface_modules.Coordinates import Coordinates
 from typing import List, Optional
 
@@ -43,14 +42,12 @@ class Injection:
     """
 
     def __init__(self,
-                 injection_number=1,
                  substrate: Optional[str] = None,
                  type: Optional[str] = None,
                  volume: int = 0,
                  flowrate: int = 0,
                  titer: Optional[float] = None,
                  molarity: Optional[float] = None):
-        self.injection_number = injection_number
         # ? do we want the options to be enforced from internal data or user input?
         self.substrate = None if substrate is None else substrate.upper()
 
@@ -68,6 +65,7 @@ class Injection:
         self.titer = titer
         self.molarity = molarity
         self.injection_coordinates = None
+        self.injection_angle = 90  # TODO update unit testing
 
     def adjust_injection_coordinates(self, ap, ml, dv):
         """
@@ -84,10 +82,32 @@ class Injection:
         """
         self.injection_coordinates = Coordinates(ap, ml, dv)
 
-    def __repr__(self):
 
-        repr = f"Injection(Injection Number: {self.injection_number}, Subtrate: {self.substrate}, Type: {self.type}, Volume: {self.volume}nL, Flowrate: {self.flowrate}nL/min, Titer: {self.titer}e12, Molarity: {self.molarity} mM)"
-        if self.injection_coordinates is None:
-            return repr
-        else:
-            return f"{repr}, Injection Coordinates: {self.injection_coordinates})"
+
+    @property
+    def injection_data(self) -> dict:
+        """
+        ### Returns the injection data as a dictionary.
+        serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__
+
+        Parameters
+        ----------
+        self : Injection
+            The current instance of the Injection class.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the injection data.
+        """
+        data = {
+            "substrate": self.substrate,
+            "type": self.type,
+            "volume(nL)": self.volume,
+            "flowrate(nL/min)": self.flowrate,
+            "titer(e12)": self.titer,
+            "molarity(mM)": self.molarity,
+            "injection_coordinates": None if self.injection_coordinates is None else self.injection_coordinates.coordinates,
+            "injection_angle": self.injection_angle
+        }
+        return data

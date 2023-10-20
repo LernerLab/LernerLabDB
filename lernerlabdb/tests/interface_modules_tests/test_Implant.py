@@ -29,9 +29,17 @@ class TestImplant:
         assert implant.implant_coordinates.coordinates == expected.coordinates
         assert isinstance(implant.implant_coordinates, Coordinates)
 
-    def test_repr(self):
+    def test_implant_data(self):
         implant = Implant(type="OPTO")
-        assert repr(implant) == "Implant(type = OPTO, angle = 90)"
-        added_coordinates = implant.adjust_implant_coordinates(1, 2, 3)
-        assert repr(
-            implant) == "Implant(type = OPTO, angle = 90), Implant Coordinates: Coordinates(AP = 1, ML = 2, DV = 3))"
+        implant.adjust_implant_coordinates(1, 2, 3)
+        expected = {"type": "OPTO", "angle": 90,
+                    "coordinates": {"AP": 1, "ML": 2, "DV": 3}}
+
+        assert implant.implant_data == expected
+
+    def test_implant_data_no_coordinates(self):
+        implant = Implant(type="OPTO")
+        expected = {"type": "OPTO", "angle": 90,
+                    "coordinates": None}
+
+        assert implant.implant_data == expected

@@ -63,9 +63,19 @@ class Implant:
         """
         self.implant_coordinates = Coordinates(ap, ml, dv)
 
-    def __repr__(self):
-        repr = f"Implant(type = {self.type}, angle = {self.angle})"
-        if self.implant_coordinates is None:
-            return repr
-        else:
-            return f"{repr}, Implant Coordinates: {self.implant_coordinates})"
+
+    @property
+    def implant_data(self):
+        """serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__
+
+        Returns
+        -------
+        dict
+            dictionary of implant data
+        """
+        data = {
+            "type": self.type,
+            "angle": self.angle,
+            "coordinates": self.implant_coordinates.coordinates if self.implant_coordinates is not None else None
+        }
+        return data
