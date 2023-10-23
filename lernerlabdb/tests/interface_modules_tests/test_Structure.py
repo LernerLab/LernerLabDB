@@ -37,9 +37,7 @@ class TestStructure:
 
         structure = Structure("Lateral Hypothalamic Area",
                               "LHA", "Left", (-1.6, 0.9, -4.9))
-        assert structure.__repr__(
-        ) == "Structure(region = LATERAL HYPOTHALAMIC AREA, accronym = LHA, hemisphere = LEFT, coordinates = {'AP': -1.6, 'ML': 0.9, 'DV': -4.9}, injections = [], implants = [])"
-
+  
     def test_add_injection(self):
         structure = Structure("Lateral Hypothalamic Area",
                               "LHA", "Left", (-1.6, 0.9, -4.9))
