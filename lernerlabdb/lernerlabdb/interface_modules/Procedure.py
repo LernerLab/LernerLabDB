@@ -1,5 +1,5 @@
 from lernerlabdb.interface_modules.Structure import Structure
-from typing import List, Dict
+from typing import List, Dict, Any
 
 
 class Procedure:
@@ -55,7 +55,7 @@ class Procedure:
         self._structures.append(structure)
 
     @property
-    def procedure_data(self) -> Dict:
+    def procedure_data(self) -> Dict[str, Any]:
         '''Returns a dictionary containing all associated data for the procedure'''
         data = {
             "name": self.name,
