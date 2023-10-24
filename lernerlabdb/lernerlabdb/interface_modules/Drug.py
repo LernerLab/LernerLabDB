@@ -22,7 +22,7 @@ class Drug:
     Attributes
     ----------
     substance : str
-        The name of the drug substance.
+        The name of the drug substance. Must be one of "BupeSR", "Bupivicaine", or "Meloxicam".
     dose : float
         The dose of the drug in milligrams per kilogram of body weight.
     volume_administered : float
