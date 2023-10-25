@@ -4,7 +4,7 @@ from lernerlabdb.interface_modules.Implant import Implant
 
 from typing import Optional, List
 
-# TODO rewrite and expand unit testing
+
 
 
 class Structure:

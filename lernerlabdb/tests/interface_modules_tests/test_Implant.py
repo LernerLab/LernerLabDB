@@ -35,11 +35,11 @@ class TestImplant:
         expected = {"type": "OPTO", "angle": 90,
                     "coordinates": {"AP": 1, "ML": 2, "DV": 3}}
 
-        assert implant.implant_data == expected
+        assert implant.data == expected
 
     def test_implant_data_no_coordinates(self):
         implant = Implant(type="OPTO")
         expected = {"type": "OPTO", "angle": 90,
                     "coordinates": None}
 
-        assert implant.implant_data == expected
+        assert implant.data == expected

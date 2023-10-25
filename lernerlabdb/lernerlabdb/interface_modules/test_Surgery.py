@@ -31,7 +31,7 @@ class TestSurgery:
 
     def test_surgery_data(self):
         surgery = Surgery(1)
-        assert surgery.surgery_data == {
+        assert surgery.data == {
             "Date": surgery.date,
             "Time of surgery": surgery.time_of_surgery,
             "Surgery number": 1,

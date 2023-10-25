@@ -33,4 +33,4 @@ class TestNote:
             "type": 'Other',
             "note": 'Testing note_data property.'
         }
-        assert note.note_data == expected_data, "note_data property is incorrect."
+        assert note.data == expected_data, "note_data property is incorrect."

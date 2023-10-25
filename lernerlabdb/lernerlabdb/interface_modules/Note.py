@@ -45,7 +45,7 @@ class Note:
         return self.time.strftime("%H:%M")
 
     @property
-    def note_data(self) -> Dict[str, Any]:
+    def data(self) -> Dict[str, Any]:
         """A dictionary containing the note data, including the date, time, type, and note content."""
         data = {"date": self.date_,
                 "time": self.time_,

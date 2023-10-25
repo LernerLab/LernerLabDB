@@ -44,7 +44,7 @@ class Drug:
         self.volume_administered = volume_administered
 
     @property
-    def drug_data(self) -> Dict[str, Any]:
+    def data(self) -> Dict[str, Any]:
         """
         Returns a dictionary containing the drug's substance, dose, and volume administered.
 

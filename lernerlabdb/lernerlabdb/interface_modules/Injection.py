@@ -82,10 +82,8 @@ class Injection:
         """
         self.injection_coordinates = Coordinates(ap, ml, dv)
 
-
-
     @property
-    def injection_data(self) -> dict:
+    def data(self) -> dict:
         """
         ### Returns the injection data as a dictionary.
         serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__

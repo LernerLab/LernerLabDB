@@ -55,7 +55,7 @@ class Procedure:
         self._structures.append(structure)
 
     @property
-    def procedure_data(self) -> Dict[str, Any]:
+    def data(self) -> Dict[str, Any]:
         '''Returns a dictionary containing all associated data for the procedure'''
         data = {
             "name": self.name,

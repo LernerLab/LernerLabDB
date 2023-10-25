@@ -63,9 +63,8 @@ class Implant:
         """
         self.implant_coordinates = Coordinates(ap, ml, dv)
 
-
     @property
-    def implant_data(self):
+    def data(self):
         """serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__
 
         Returns

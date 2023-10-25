@@ -38,37 +38,37 @@ class TestInjection:
 
     def test_injection_data(self):
         inj = Injection(
-            substrate = "AAV-dLIGHT1.3b",
-            type = 'VIRUS',
-            titer = 1.0,
-            volume = 500, 
-            flowrate = 100)
+            substrate="AAV-dLIGHT1.3b",
+            type='VIRUS',
+            titer=1.0,
+            volume=500,
+            flowrate=100)
         inj.adjust_injection_coordinates(1, 2, 3)
-        
+
         expected = {'substrate': 'AAV-DLIGHT1.3B',
-        'type': 'VIRUS',
-        'volume(nL)': 500,
-        'flowrate(nL/min)': 100,
-        'titer(e12)': 1.0,
-        'molarity(mM)': None,
-        'injection_coordinates': {'AP': 1, 'ML': 2, 'DV': 3},
-        'injection_angle': 90}
-        assert inj.injection_data == expected
-        
+                    'type': 'VIRUS',
+                    'volume(nL)': 500,
+                    'flowrate(nL/min)': 100,
+                    'titer(e12)': 1.0,
+                    'molarity(mM)': None,
+                    'injection_coordinates': {'AP': 1, 'ML': 2, 'DV': 3},
+                    'injection_angle': 90}
+        assert inj.data == expected
+
     def test_injection_data_no_cords(self):
         inj = Injection(
-            substrate = "AAV-dLIGHT1.3b",
-            type = 'VIRUS',
-            titer = 1.0,
-            volume = 500, 
-            flowrate = 100)
-        
+            substrate="AAV-dLIGHT1.3b",
+            type='VIRUS',
+            titer=1.0,
+            volume=500,
+            flowrate=100)
+
         expected = {'substrate': 'AAV-DLIGHT1.3B',
-        'type': 'VIRUS',
-        'volume(nL)': 500,
-        'flowrate(nL/min)': 100,
-        'titer(e12)': 1.0,
-        'molarity(mM)': None,
-        'injection_coordinates': None,
-        'injection_angle': 90}
-        assert inj.injection_data == expected
+                    'type': 'VIRUS',
+                    'volume(nL)': 500,
+                    'flowrate(nL/min)': 100,
+                    'titer(e12)': 1.0,
+                    'molarity(mM)': None,
+                    'injection_coordinates': None,
+                    'injection_angle': 90}
+        assert inj.data == expected

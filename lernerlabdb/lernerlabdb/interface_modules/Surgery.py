@@ -5,6 +5,8 @@ from lernerlabdb.interface_modules.Drug import Drug
 from lernerlabdb.interface_modules.Note import Note
 from lernerlabdb.interface_modules.Procedure import Procedure
 
+#!TODO Unit testing
+
 
 class Surgery:
     """
@@ -41,22 +43,31 @@ class Surgery:
     surgery_data : dict
         Returns a dictionary containing all associated data for the surgery.
     """
+
     def __init__(self, surgery_number: int):
-        self.date: datetime = datetime.now().date()
-        self.time_of_surgery: datetime = datetime.now().time()
+        self._date: datetime = datetime.now()
         self.surgery_number = surgery_number
         self._procedures: List[Procedure] = []
         self._drugs: List[Drug] = []
         self._notes: List[Note] = []
 
     @property
-    def date_(self) -> datetime:
+    def date(self) -> datetime:
+        '''The date onbject of the surgery'''
+        return self._date.date()
+
+    @property
+    def date_string(self) -> datetime:
         '''The string date of the surgery'''
         return self.date.strftime("%m/%d/%Y")
 
     @property
-    def time_of_surgery_(self) -> datetime:
+    def time_of_surgery(self) -> datetime:
         '''The string time of the surgery'''
+        return self._date.time()
+
+    @property
+    def time_of_surgery_string(self):
         return self.time_of_surgery.strftime("%H:%M")
 
     @property
@@ -64,37 +75,49 @@ class Surgery:
         '''A list of procedures associated with the surgery'''
         return self._procedures
 
-    def add_procedure(self, procedure: Procedure) -> None:
+    def add_procedure(self, *procedures: Procedure) -> None:
         '''Adds a Procedure object to the list of procedures associated with the surgery'''
-        self._procedures.append(procedure)
+        for procedure in procedures:
+            if isinstance(procedure, list):
+                self._procedures.extend(procedure)
+            else:
+                self._procedures.append(procedure)
 
     @property
     def drugs(self) -> List[Drug]:
         '''A list of drugs associated with the surgery'''
         return self._drugs
 
-    def add_drug(self, drug: Drug) -> None:
+    def add_drug(self, *drugs: Drug) -> None:
         '''Adds a Drug object to the list of drugs associated with the surgery'''
-        self._drugs.append(drug)
+        for drug in drugs:
+            if isinstance(drug, list):
+                self._drugs.extend(drug)
+            else:
+                self._drugs.append(drug)
 
     @property
     def notes(self) -> List[Note]:
         '''A list of notes associated with the surgery'''
         return self._notes
 
-    def add_note(self, note: Note) -> None:
+    def add_note(self, *notes: Note) -> None:
         '''Adds a Note object to the list of notes associated with the surgery'''
-        self._notes.append(note)
+        for note in notes:
+            if isinstance(note, list):
+                self._notes.extend(note)
+            else:
+                self._notes.append(note)
 
     @property
-    def surgery_data(self) -> Dict[str, Any]:
+    def data(self) -> Dict[str, Any]:
         '''Returns a dictionary containing all associated data for the surgery'''
         data = {
             "Date": self.date,
             "Time of surgery": self.time_of_surgery,
             "Surgery number": self.surgery_number,
-            "Procedures": [procedure.procedure_data for procedure in self.procedures],
-            "Drugs": [drug.drug_data for drug in self.drugs],
-            "Notes": [note.note_data for note in self.notes],
+            "Procedures": [procedure.data for procedure in self.procedures],
+            "Drugs": [drug.data for drug in self.drugs],
+            "Notes": [note.data for note in self.notes],
         }
         return data
