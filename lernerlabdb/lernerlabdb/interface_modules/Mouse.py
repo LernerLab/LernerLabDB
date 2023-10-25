@@ -71,6 +71,15 @@ class Mouse:
         return self.age_days // 7
 
     @property
+    def age_(self) -> Dict[str, int]:
+        return {
+            "days": self.age_days,
+            'weeks': self.age_weeks,
+            'day since first surgery': self.days_since_first_surgery,
+            'weeks since first surgery': self.weeks_since_first_surgery
+        }
+
+    @property
     def days_since_first_surgery(self) -> NumberOfDays:
         if len(self.surgeries) == 0:
             return 0
@@ -170,7 +179,7 @@ class Mouse:
                 self._experiments.append(exp)
 
     @property
-    def mouse_data(self) -> Dict[str, Any]:
+    def data(self) -> Dict[str, Any]:
         data = {
             'unique identifier': self.unique_identifier,
             'cage': self.cage,
@@ -182,12 +191,7 @@ class Mouse:
             'status': self.status,
             'experiment_owner': self.experiment_owner,
             'surgeon': self.surgeon,
-            'age': {
-                "days": self.age_days,
-                'weeks': self.age_weeks,
-                'day since first surgery': self.days_since_first_surgery,
-                'weeks since first surgery': self.weeks_since_first_surgery
-            },
+            'age': self.age_,
             "surgeries": [surgery.data for surgery in self.surgeries],
             "notes": [note.data for note in self.notes],
             "experiments": [experiment.experiment_data for experiment in self.experiments],
