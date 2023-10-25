@@ -110,4 +110,4 @@ class TestStructure:
                                                     'angle': 90,
                                                     'coordinates': {'AP': 1, 'ML': 2, 'DV': 3}}}
                          }
-        assert structure.structure_data == expected_data
+        assert structure.data == expected_data

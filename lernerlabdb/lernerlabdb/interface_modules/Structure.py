@@ -5,8 +5,6 @@ from lernerlabdb.interface_modules.Implant import Implant
 from typing import Optional, List
 
 
-
-
 class Structure:
     """
     Represents a brain structure and its associated coordinates.
@@ -103,7 +101,7 @@ class Structure:
         self._implants.remove(implant)
 
     @property
-    def structure_data(self):
+    def data(self):
         '''serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__
             Parameters
             ----------
@@ -120,7 +118,7 @@ class Structure:
             "accronym": self.accronym,
             "hemisphere": self.hemisphere,
             "coordinates": self.coordinates,
-            "injections": {f"injection_{i+1}": inj.injection_data for i, inj in enumerate(self.injections)},
-            "implants": {f"implant_{i+1}": imp.implant_data for i, imp in enumerate(self.implants) if imp is not None},
+            "injections": {f"injection_{i+1}": inj.data for i, inj in enumerate(self.injections)},
+            "implants": {f"implant_{i+1}": imp.data for i, imp in enumerate(self.implants) if imp is not None},
         }
         return data

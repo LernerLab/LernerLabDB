@@ -32,6 +32,6 @@ class TestProcedure:
         expected_data = {
             "name": "test_procedure",
             "id": 1,
-            "structures": {"structure_1": test_structure.structure_data}
+            "structures": {"structure_1": test_structure.data}
         }
         assert test_procedure.data == expected_data

@@ -24,9 +24,9 @@ class TestSurgery:
 
     def test_publics(self):
         surgery = Surgery(1)
-        assert surgery.date_ == datetime.now().strftime(
+        assert surgery.date_string == datetime.now().strftime(
             "%m/%d/%Y"), "Date property is incorrect."
-        assert surgery.time_of_surgery_ == datetime.now().strftime(
+        assert surgery.time_of_surgery_string== datetime.now().strftime(
             "%H:%M"), "Time property is incorrect."
 
     def test_surgery_data(self):

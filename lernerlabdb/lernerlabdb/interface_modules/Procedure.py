@@ -60,6 +60,6 @@ class Procedure:
         data = {
             "name": self.name,
             "id": self.id,
-            "structures": {f"structure_{i+1}": struct.structure_data for i, struct in enumerate(self.structures)}
+            "structures": {f"structure_{i+1}": struct.data for i, struct in enumerate(self.structures)}
         }
         return data
