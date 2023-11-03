@@ -6,6 +6,7 @@ from lernerlabdb.interface_modules.Surgery import Surgery
 from lernerlabdb.interface_modules.Note import Note
 from lernerlabdb.interface_modules.Experiment import Experiment
 from lernerlabdb.interface_modules.Scientist import Scientist
+from lernerlabdb.interface_moduls.enums import Sex, Zygosity, MouseStatus
 
 Date = NewType('Date', date)
 Time = NewType('Time', time)
@@ -19,28 +20,22 @@ class Mouse:
 
     def __init__(self,
                  date_of_birth: datetime,
-                 sex: Literal["male", "female"],
+                 sex:Sex, 
                  ear_tag: int,
                  genotype,
-                 zygosity: Literal['wildtype', 'homozygous', 'heterozygous', 'unknown'],
+                 zygosity: Zygosity,# create enum
                  experiment_owner: Optional[Scientist],
                  surgeon: Optional[Scientist] = None,
                  cage: Optional[Cage] = None,
-                 status: Literal['alive', 'dead'] = 'alive'
+                 status: MouseStatus = MouseStatus.ALIVE
                  ):
         self._date_of_birth = date_of_birth
-        if sex not in ['male', 'female']:
-            raise ValueError(
-                "Mouse sex must be one of: 'male', 'female'"
-            )
+
         self._sex = sex
         self._ear_tag = ear_tag
         self._genotype = genotype
 
-        if zygosity not in ['wildtype', 'homozygous', 'heterozygous', 'unknown']:
-            raise ValueError(
-                "Mouse zygosity must be one of: 'wildtype', 'homozygous', 'heterozygous', 'unknown'"
-            )
+
         self._zygosity = zygosity
 
         if surgeon is None:
@@ -93,7 +88,7 @@ class Mouse:
 
     @property
     def sex(self) -> Literal['male', 'female']:
-        return self._sex
+        return self._sex.value
 
     @property
     def ear_tag(self) -> int:
@@ -107,10 +102,10 @@ class Mouse:
         self._genotype = genotype
 
     @property
-    def zygosity(self) -> Literal['wildtype', 'homozygous', 'heterozygous', 'unknown']:
-        return self._zygosity
+    def zygosity(self) ->Zygosity.value:
+        return self._zygoity.value
 
-    def update_zygosity(self, zygosity):
+    def update_zygosity(self, zygosity): #! will need dropdown menu
         self._zygosity = zygosity
 
     @property
@@ -125,14 +120,16 @@ class Mouse:
         self._cage = cage
 
     @property
-    def status(self) -> Literal['alive', 'dead']:
-        return self._status
+    def status(self) -> MouseStatus.value:
+        return self._status.value
 
     @status.setter
-    def status(self, status) -> None:
-        if status not in ['alive', 'dead']:
-            raise ValueError('Mouse status must be either "alive" or "dead"')
-        self._status = status
+    def update_status(self) -> None:
+        if self._status.value==MouseStatus.ALIVE:
+            self._status = MouseStatus.DEAD
+        else:
+            self._status = MouseStatus.ALIVE
+
 
     @property
     def surgeon(self) -> Scientist:
@@ -171,7 +168,7 @@ class Mouse:
     def experiments(self) -> List[Experiment]:
         return self._experiments
 
-    def add_experient(self, *experiments: Experiment) -> None:
+    def add_experiment(self, *experiments: Experiment) -> None:
         for exp in experiments:
             if isinstance(exp, list):
                 self._experiments.extend(exp)

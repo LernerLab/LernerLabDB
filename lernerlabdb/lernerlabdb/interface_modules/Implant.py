@@ -1,5 +1,6 @@
 from typing import Optional
 from lernerlabdb.interface_modules.Coordinates import Coordinates
+from lernerlabdb.interface_modules.enums import ImplantType
 
 
 class Implant:
@@ -35,20 +36,18 @@ class Implant:
         Implant(type = OPTO, angle = 90), Implant Coordinates: Coordinates(ap=1, ml=2, dv=3)
     """
 
-    def __init__(self, type: str, angle: Optional[int] = 90):
-
-        accepted_types = ['CANNULA', 'OPTO',
-                          'ELECTRODE', 'LENS', 'FIBER_OPTIC', "PELLET"]
-        if type not in accepted_types:
-            raise ValueError(
-                f"Invalid type {type}. Must be one of {accepted_types}")
+    def __init__(self, type: ImplantType, angle: Optional[int] = 90):
 
         # ? do we add metrics for the type: ie length, diameter, NA, etc?
-        self.type = type
+        self._type = type
         self.angle = angle
         self.implant_coordinates = None
 
-    def adjust_implant_coordinates(self, ap, ml, dv):
+    @property
+    def type(self) -> str:
+        return self._type.value
+
+    def adjust_implant_coordinates(self, ap, ml, dv,coordinates = Coordinates):
         """
         Adjusts the coordinates of the implant.
 
@@ -61,7 +60,7 @@ class Implant:
         dv : float
             Dorsoventral coordinate.
         """
-        self.implant_coordinates = Coordinates(ap, ml, dv)
+        self.implant_coordinates = coordinates(ap, ml, dv)
 
     @property
     def data(self):

@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-
+from lernerlabdb.interface_modules.enums import DrugType
 
 class Drug:
     """
@@ -34,14 +34,15 @@ class Drug:
         Returns a dictionary containing the drug's substance, dose, and volume administered.
     """
 
-    def __init__(self, substance: str, dose: float, volume_administered: float):
-        approved_substances = ["BupeSR", "Bupivicaine", "Meloxicam"]
-        if substance not in approved_substances:
-            raise ValueError(
-                f"Substance not approved, must be one of {approved_substances}")
-        self.substance = substance
+    def __init__(self, substance: DrugType, dose: float, volume_administered: float):
+        
+        self._substance = substance
         self.dose = dose
         self.volume_administered = volume_administered
+        
+    @property
+    def substance(self):
+        return self._substance.value
 
     @property
     def data(self) -> Dict[str, Any]:

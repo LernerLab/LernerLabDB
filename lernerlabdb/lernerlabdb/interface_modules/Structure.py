@@ -1,6 +1,7 @@
 from lernerlabdb.interface_modules.Coordinates import Coordinates
 from lernerlabdb.interface_modules.Injection import Injection
 from lernerlabdb.interface_modules.Implant import Implant
+from lernerlabdb.interface_modules.enums import ImplantType, Hemisphere
 
 from typing import Optional, List
 
@@ -29,7 +30,7 @@ class Structure:
 
     def __init__(self, region: str,
                  accronym: str,
-                 hemisphere: str,
+                 hemisphere: Hemisphere,
                  coordinates: tuple = (None, None, None)):
         """
         Initializes a structure object with the given region, acronym, hemisphere, and coordinates.
@@ -42,31 +43,15 @@ class Structure:
         """
         self.region = region.upper()
         self.accronym = accronym.upper()
-        try:
-
-            ''' This block checks for valid hemisphere input. 
-            It is contrained to left, right bilateral, or none.
-            It will take in any case and convert it to upper case full word.'''
-            if hemisphere is not None:
-                hemisphere = hemisphere.upper()
-            if hemisphere == 'L':
-                hemisphere = 'LEFT'
-            elif hemisphere == 'R':
-                hemisphere = 'RIGHT'
-            elif hemisphere == 'B':
-                hemisphere = 'BILATERAL'
-
-            assert hemisphere in ["LEFT", "RIGHT", 'BILATERAL', None]
-            self.hemisphere = hemisphere
-        except AssertionError as e:
-            print(
-                "Invalid hemisphere input. Please enter 'Left', 'Right', 'Bilateral', or None.")
-
+        self._hemisphere = hemisphere
         self._coordinates = Coordinates(
             coordinates[0], coordinates[1], coordinates[2])
-
         self._injections = []
         self._implants = []
+
+    @property
+    def hemisphere(self):
+        return self._hemisphere.value
 
     @property
     def coordinates(self):

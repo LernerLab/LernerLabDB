@@ -1,5 +1,6 @@
 from lernerlabdb.interface_modules.Coordinates import Coordinates
 from typing import List, Optional
+from lernerlabdb.interface_modules.enums import InjectionType
 
 
 class Injection:
@@ -42,30 +43,25 @@ class Injection:
     """
 
     def __init__(self,
+                 type: InjectionType,
                  substrate: Optional[str] = None,
-                 type: Optional[str] = None,
                  volume: int = 0,
                  flowrate: int = 0,
                  titer: Optional[float] = None,
                  molarity: Optional[float] = None):
-        # ? do we want the options to be enforced from internal data or user input?
+
+        self._type = type
         self.substrate = None if substrate is None else substrate.upper()
-
-        # ? we could have this just be a dropdown selecteion in the UI
-        possible_types = ["VIRUS", "TRACER",
-                          "DYE", 'CYTOTOXIC', "DRUG", "OTHER"]
-
-        if type not in possible_types and type is not None:
-            raise ValueError(
-                f"Invalid type. Please enter one of the following: {possible_types}")
-
-        self.type = type
         self.volume = volume
         self.flowrate = flowrate
         self.titer = titer
         self.molarity = molarity
         self.injection_coordinates = None
         self.injection_angle = 90  # TODO update unit testing
+
+    @property
+    def type(self):
+        return self._type.value
 
     def adjust_injection_coordinates(self, ap, ml, dv):
         """
