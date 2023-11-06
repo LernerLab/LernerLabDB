@@ -4,7 +4,7 @@ import pandas as pd
 import gspread
 from datetime import datetime, date, time, timedelta
 from typing import Dict, Any, Optional, Literal, NewType
-from lernerlabdb.interface_modules.enums import CageStatus, Location, Sex
+from lernerlabdb.interface_modules.enums import CageStatus, Location, Sex, Genotype
 
 
 Date = NewType('Date', date)
@@ -21,6 +21,7 @@ class Cage:
                  barcode: int,
                  cage_nickname: str,
                  num_animals: int,
+                 genotype:Genotype,
                  sex: Sex,
                  date_of_birth: Date,
                  location: Location,
@@ -30,6 +31,7 @@ class Cage:
         self._cage_nickname = cage_nickname
         self._parent_cage_barcode: Optional[int] = None
         self._num_animals = num_animals
+        self._genotype = genotype
         self._sex = sex
         self._date_of_birth = date_of_birth
         self._location = location
@@ -55,6 +57,9 @@ class Cage:
     def num_animals(self):
         return self._num_animals
 
+    @property
+    def genotype(self):
+        return self._genotype.value
     @property
     def sex(self):
         return self._sex.value
@@ -84,6 +89,7 @@ class Cage:
             "cage_nickname": self.cage_nickname,
             "parent_cage": self.parent_cage,
             "num_animals": self.num_animals,
+            'genotype': self.genotype,
             "sex": self.sex,
             "age": self.age,
             "location": self.location,

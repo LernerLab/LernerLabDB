@@ -1,40 +1,39 @@
 from datetime import datetime, date, time, timedelta
 from typing import List, Dict, Any, Optional, Literal, NewType
+from uuid import uuid4
 
 from lernerlabdb.interface_modules.Cage import Cage
 from lernerlabdb.interface_modules.Surgery import Surgery
 from lernerlabdb.interface_modules.Note import Note
 from lernerlabdb.interface_modules.Experiment import Experiment
 from lernerlabdb.interface_modules.Scientist import Scientist
-from lernerlabdb.interface_moduls.enums import Sex, Zygosity, MouseStatus
+from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype
 
 Date = NewType('Date', date)
 Time = NewType('Time', time)
 NumberOfDays = NewType('NumberOfDays', int)
 NumberOfWeeks = NewType('NumberOfWeeks', int)
 
-#!TODO Unit testing
-
 
 class Mouse:
 
     def __init__(self,
                  date_of_birth: datetime,
-                 sex:Sex, 
+                 sex: Sex,
                  ear_tag: int,
-                 genotype,
-                 zygosity: Zygosity,# create enum
-                 experiment_owner: Optional[Scientist],
+                 genotype: Genotype,
+                 zygosity: Zygosity,
+                 experiment_owner: Scientist,
                  surgeon: Optional[Scientist] = None,
                  cage: Optional[Cage] = None,
                  status: MouseStatus = MouseStatus.ALIVE
                  ):
+        self._unique_id = uuid4()
         self._date_of_birth = date_of_birth
 
         self._sex = sex
         self._ear_tag = ear_tag
         self._genotype = genotype
-
 
         self._zygosity = zygosity
 
@@ -44,12 +43,15 @@ class Mouse:
             self._surgeon = surgeon
         self._experiment_owner = experiment_owner
         self._cage = cage
-        self._status: Literal['alive', 'dead'] = 'alive'
+        self._status: MouseStatus = MouseStatus.ALIVE
         self._surgeries: List[Surgery] = []
         self._notes: List[Note] = []
         self._experiments: List[Experiment] = []
 
     # Public methods and updaters
+    @property
+    def unique_id(self) -> str:
+        return self._unique_id.hex
 
     @property
     def date_of_birth(self) -> Date:
@@ -95,22 +97,18 @@ class Mouse:
         return self._ear_tag
 
     @property
-    def genotype(self):
-        return self._genotype
+    def genotype(self) -> str:
+        return self._genotype.value
 
     def update_genotype(self, genotype):
         self._genotype = genotype
 
     @property
-    def zygosity(self) ->Zygosity.value:
-        return self._zygoity.value
+    def zygosity(self) -> str:
+        return self._zygosity.value
 
-    def update_zygosity(self, zygosity): #! will need dropdown menu
+    def update_zygosity(self, zygosity):
         self._zygosity = zygosity
-
-    @property
-    def unique_identifier(self) -> float:
-        pass
 
     @property
     def cage(self) -> Cage:
@@ -120,20 +118,22 @@ class Mouse:
         self._cage = cage
 
     @property
-    def status(self) -> MouseStatus.value:
+    def status(self) -> str:
         return self._status.value
 
     @status.setter
     def update_status(self) -> None:
-        if self._status.value==MouseStatus.ALIVE:
+        if self._status.value == MouseStatus.ALIVE:
             self._status = MouseStatus.DEAD
         else:
             self._status = MouseStatus.ALIVE
 
-
     @property
     def surgeon(self) -> Scientist:
-        return self._surgeon
+        if self._surgeon is None:
+            return self._experiment_owner
+        else:
+            return self._surgeon
 
     @property
     def experiment_owner(self) -> Scientist:
