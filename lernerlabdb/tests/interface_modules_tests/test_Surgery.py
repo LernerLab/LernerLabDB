@@ -7,9 +7,13 @@ from lernerlabdb.interface_modules.Procedure import Procedure
 from lernerlabdb.interface_modules.Surgery import Surgery
 
 
+@pytest.fixture
+def surgery():
+    return Surgery(1)
+
+
 class TestSurgery:
-    def test_init(self):
-        surgery = Surgery(1)
+    def test_init(self, surgery):
         assert isinstance(surgery.date, date), "Date property is incorrect."
         assert isinstance(surgery.time_of_surgery,
                           time), "Time property is incorrect."
@@ -22,15 +26,13 @@ class TestSurgery:
         assert isinstance(surgery.notes, list), "Notes property is not a list."
         assert len(surgery.notes) == 0, "Notes property is not empty."
 
-    def test_publics(self):
-        surgery = Surgery(1)
+    def test_publics(self, surgery):
         assert surgery.date_string == datetime.now().strftime(
             "%m/%d/%Y"), "Date property is incorrect."
-        assert surgery.time_of_surgery_string== datetime.now().strftime(
+        assert surgery.time_of_surgery_string == datetime.now().strftime(
             "%H:%M"), "Time property is incorrect."
 
-    def test_surgery_data(self):
-        surgery = Surgery(1)
+    def test_surgery_data(self, surgery):
         assert surgery.data == {
             "Date": surgery.date,
             "Time of surgery": surgery.time_of_surgery,
