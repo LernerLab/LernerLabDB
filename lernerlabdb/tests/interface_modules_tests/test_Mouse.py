@@ -101,7 +101,7 @@ class TestMouse:
         assert default_mouse.cage is None
         assert default_mouse.surgeries == []
         assert default_mouse.notes == []
-        assert default_mouse.experiments == []
+        assert default_mouse.experimental_data == []
 
     def test_update_zygosity(self, default_mouse):
         default_mouse.update_zygosity(Zygosity.HETEROZYGOUS)
@@ -118,10 +118,6 @@ class TestMouse:
     def test_add_surgeries(self, default_mouse, surgery1, surgery2):
         default_mouse.add_surgeries(surgery1, surgery2)
         assert default_mouse.surgeries == [surgery1, surgery2]
-
-    def test_add_experiment(self, default_mouse, experiment):
-        default_mouse.add_experiment(experiment)
-        assert default_mouse.experiments == [experiment]
 
     def test_mouse_data_property(self, default_mouse):
         data = default_mouse.data
@@ -140,5 +136,3 @@ class TestMouse:
         assert data['surgeries'] == [
             surgery.data for surgery in default_mouse.surgeries]
         assert data['notes'] == [note.data for note in default_mouse.notes]
-        assert data['experiments'] == [
-            experiment.experiment_data for experiment in default_mouse.experiments]

@@ -5,7 +5,7 @@ from uuid import uuid4
 from lernerlabdb.interface_modules.Cage import Cage
 from lernerlabdb.interface_modules.Surgery import Surgery
 from lernerlabdb.interface_modules.Note import Note
-from lernerlabdb.interface_modules.Experiment import Experiment
+from lernerlabdb.interface_modules.ExperimentalData import ExperimentalData
 from lernerlabdb.interface_modules.Scientist import Scientist
 from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype
 
@@ -46,7 +46,7 @@ class Mouse:
         self._status: MouseStatus = MouseStatus.ALIVE
         self._surgeries: List[Surgery] = []
         self._notes: List[Note] = []
-        self._experiments: List[Experiment] = []
+        self._experimental_data: List[ExperimentalData] = []
 
     # Public methods and updaters
     @property
@@ -165,15 +165,15 @@ class Mouse:
                 self._notes.append(note)
 
     @property
-    def experiments(self) -> List[Experiment]:
-        return self._experiments
+    def experimental_data(self) -> List[ExperimentalData]:
+        return self._experimental_data
 
-    def add_experiment(self, *experiments: Experiment) -> None:
+    def add_experiment(self, *experiments: ExperimentalData) -> None:
         for exp in experiments:
             if isinstance(exp, list):
-                self._experiments.extend(exp)
+                self._experimental_data.extend(exp)
             else:
-                self._experiments.append(exp)
+                self._experimental_data.append(exp)
 
     @property
     def data(self) -> Dict[str, Any]:
@@ -190,8 +190,8 @@ class Mouse:
             'surgeon': self.surgeon,
             'age': self.age_,
             "surgeries": [surgery.data for surgery in self.surgeries],
-            "notes": [note.data for note in self.notes],
-            "experiments": [experiment.experiment_data for experiment in self.experiments],
+            "notes": [note.data for note in self.notes]
+            #! Add experimental data links, references, or paths to files
 
         }
         return data
