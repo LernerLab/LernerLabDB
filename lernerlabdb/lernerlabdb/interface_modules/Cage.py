@@ -1,5 +1,4 @@
 
-from enum import Enum
 import pandas as pd
 import gspread
 from datetime import datetime, date, time, timedelta
@@ -12,8 +11,6 @@ Time = NewType('Time', time)
 NumberOfDays = NewType('NumberOfDays', int)
 NumberOfWeeks = NewType('NumberOfWeeks', int)
 
-
-#!TODO Unit testing
 
 
 class Cage:
@@ -85,7 +82,7 @@ class Cage:
     @property
     def data(self):
         data = {
-            "barcode'": self.barcode,
+            "barcode": self.barcode,
             "cage_nickname": self.cage_nickname,
             "parent_cage": self.parent_cage,
             "num_animals": self.num_animals,
