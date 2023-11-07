@@ -80,7 +80,7 @@ class TestMouse:
             ear_tag=1,
             genotype=Genotype.WT,
             zygosity=Zygosity.HOMOZYGOUS,
-            experiment_owner=scientist1S
+            experiment_owner=scientist1
         )
         return mouse
 
