@@ -72,7 +72,7 @@ class Mouse:
         return {
             "days": self.age_days,
             'weeks': self.age_weeks,
-            'day since first surgery': self.days_since_first_surgery,
+            'days since first surgery': self.days_since_first_surgery,
             'weeks since first surgery': self.weeks_since_first_surgery
         }
 
@@ -178,7 +178,7 @@ class Mouse:
     @property
     def data(self) -> Dict[str, Any]:
         data = {
-            'unique identifier': self.unique_identifier,
+            'unique id': self.unique_id,
             'cage': self.cage,
             'ear tag': self.ear_tag,
             'sex': self.sex,
