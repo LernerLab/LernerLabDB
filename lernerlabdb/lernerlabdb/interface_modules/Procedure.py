@@ -29,8 +29,10 @@ class Procedure:
     procedure_data()
         Returns a dictionary containing the procedure's name, ID, and associated structures.
     """
+    name: str
+    id: int
 
-    def __init__(self, name: str, id: int):
+    def __init__(self, name, id):
         self._name = name
         self._id = id  # ! I think we need a way to auto-generate this and cross reference the db, but placeholder for now
         self._structures: List = []

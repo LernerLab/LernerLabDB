@@ -9,6 +9,7 @@ Time = NewType("Time", datetime.time)
 
 class Note:
     """
+    date
     A class representing a note about a medical procedure or recovery.
 
     Attributes:
@@ -22,15 +23,18 @@ class Note:
         ValueError: If the `type` argument is not one of the allowed options.
 
     """
+    date: Date
+    time: Time
+    type: NoteType
+    note: str
 
     def __init__(self,
-                 type: NoteType,
+                 type,
                  note):
-        self.date: Date = datetime.now().date()
-        self.time: Time = datetime.now().time()
+        self.date = datetime.now().date()
+        self.time = datetime.now().time()
         self._type = type
         self.note = note
-
 
     @property
     def date_(self) -> str:
@@ -41,9 +45,11 @@ class Note:
     def time_(self) -> str:
         """The time of the note in the format "HH:MM"."""
         return self.time.strftime("%H:%M")
+
     @property
-    def type(self)->str:
+    def type(self) -> str:
         return self._type.value
+
     @property
     def data(self) -> Dict[str, Any]:
         """A dictionary containing the note data, including the date, time, type, and note content."""

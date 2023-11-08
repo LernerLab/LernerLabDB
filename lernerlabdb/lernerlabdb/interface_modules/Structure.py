@@ -3,7 +3,7 @@ from lernerlabdb.interface_modules.Injection import Injection
 from lernerlabdb.interface_modules.Implant import Implant
 from lernerlabdb.interface_modules.enums import ImplantType, Hemisphere
 
-from typing import Optional, List
+from typing import Optional, List, Tuple
 
 
 class Structure:
@@ -27,11 +27,14 @@ class Structure:
         print(structure2)
         # Output: region = Cortex, accronym = CTX, hemisphere = Right, coordinates = Coordinates not logged. Please log coordinates.
     """
+    accronym: str
+    hemisphere: Hemisphere
+    corrdiates: Tuple[float]
 
-    def __init__(self, region: str,
-                 accronym: str,
-                 hemisphere: Hemisphere,
-                 coordinates: tuple = (None, None, None)):
+    def __init__(self, region,
+                 accronym,
+                 hemisphere,
+                 coordinates):
         """
         Initializes a structure object with the given region, acronym, hemisphere, and coordinates.
 

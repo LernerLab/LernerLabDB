@@ -1,11 +1,12 @@
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, NewType
 
 from lernerlabdb.interface_modules.Drug import Drug
 from lernerlabdb.interface_modules.Note import Note
 from lernerlabdb.interface_modules.Procedure import Procedure
 
-#!TODO Unit testing
+
+Date = NewType('Date', datetime.date)
 
 
 class Surgery:
@@ -44,9 +45,12 @@ class Surgery:
         Returns a dictionary containing all associated data for the surgery.
     """
 
-    def __init__(self, surgery_number: int):
-        self._date: datetime = datetime.now()
+    surgery_number: int
+
+    def __init__(self, surgery_number):
         self.surgery_number = surgery_number
+
+        self._date: Date = datetime.now()
         self._procedures: List[Procedure] = []
         self._drugs: List[Drug] = []
         self._notes: List[Note] = []

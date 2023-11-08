@@ -12,18 +12,29 @@ NumberOfDays = NewType('NumberOfDays', int)
 NumberOfWeeks = NewType('NumberOfWeeks', int)
 
 
-
 class Cage:
+
+    barcode: int
+    cage_nickname: str
+    num_animals: int
+    genotype: Genotype
+    sex: Sex
+    date_of_birth: Date
+    location: Location
+    status: CageStatus
+    parent_cage_barcode: Optional[int]
+
     def __init__(self,
-                 barcode: int,
-                 cage_nickname: str,
-                 num_animals: int,
-                 genotype:Genotype,
-                 sex: Sex,
-                 date_of_birth: Date,
-                 location: Location,
-                 status: CageStatus = CageStatus.ACTIVE,
-                 parent_cage_barcode: int = None):
+                 barcode,
+                 cage_nickname,
+                 num_animals,
+                 genotype,
+                 sex,
+                 date_of_birth,
+                 location,
+                 status=CageStatus.ACTIVE,
+                 parent_cage_barcode=None):
+
         self._barcode = barcode
         self._cage_nickname = cage_nickname
         self._parent_cage_barcode: Optional[int] = None
@@ -33,6 +44,7 @@ class Cage:
         self._date_of_birth = date_of_birth
         self._location = location
         self._status = status
+        self.parent_cage_barcode = parent_cage_barcode
 
     @property
     def barcode(self):
@@ -57,6 +69,7 @@ class Cage:
     @property
     def genotype(self):
         return self._genotype.value
+
     @property
     def sex(self):
         return self._sex.value

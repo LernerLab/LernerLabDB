@@ -1,6 +1,7 @@
 from typing import List, Dict, Any
 from lernerlabdb.interface_modules.enums import DrugType
 
+
 class Drug:
     """
     A class representing a drug.
@@ -34,12 +35,16 @@ class Drug:
         Returns a dictionary containing the drug's substance, dose, and volume administered.
     """
 
-    def __init__(self, substance: DrugType, dose: float, volume_administered: float):
-        
+    substance: DrugType
+    dose: float
+    volume_administered: float
+
+    def __init__(self, substance, dose, volume_administered):
+
         self._substance = substance
         self.dose = dose
         self.volume_administered = volume_administered
-        
+
     @property
     def substance(self):
         return self._substance.value

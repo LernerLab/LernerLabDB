@@ -16,17 +16,26 @@ NumberOfWeeks = NewType('NumberOfWeeks', int)
 
 
 class Mouse:
+    date_of_birth: Date
+    sex: Sex
+    ear_tag: int
+    genotype: Genotype
+    zygosity: Zygosity
+    experiment_owner: Scientist
+    surgeon: Optional[Scientist] = None
+    cage: Optional[Cage] = None
+    status: MouseStatus = MouseStatus.ALIVE
 
     def __init__(self,
-                 date_of_birth: datetime,
-                 sex: Sex,
-                 ear_tag: int,
-                 genotype: Genotype,
-                 zygosity: Zygosity,
-                 experiment_owner: Scientist,
-                 surgeon: Optional[Scientist] = None,
-                 cage: Optional[Cage] = None,
-                 status: MouseStatus = MouseStatus.ALIVE
+                 date_of_birth,
+                 sex,
+                 ear_tag,
+                 genotype,
+                 zygosity,
+                 experiment_owner,
+                 surgeon,
+                 cage,
+                 status
                  ):
         self._unique_id = uuid4()
         self._date_of_birth = date_of_birth
@@ -121,7 +130,6 @@ class Mouse:
     def status(self) -> str:
         return self._status.value
 
-    @status.setter
     def update_status(self) -> None:
         if self._status.value == MouseStatus.ALIVE:
             self._status = MouseStatus.DEAD

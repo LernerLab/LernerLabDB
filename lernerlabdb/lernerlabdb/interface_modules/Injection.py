@@ -41,14 +41,20 @@ class Injection:
     >>> print(injection1)
     Injection(Injection Number: 1, Subtrate: avv5-eGFP, Type: virus, Volume: 200nL, Flowrate: 100nL/min, Titer: 1.5e12, Molarity: None mM, Injection Coordinates: Coordinates(AP: 1, ML: 2, DV: 3))
     """
+    type: InjectionType
+    substrate: Optional[str] = None
+    volume: int = 0
+    flowrate: int = 0
+    titer: Optional[float] = None
+    molarity: Optional[float] = None
 
     def __init__(self,
-                 type: InjectionType,
-                 substrate: Optional[str] = None,
-                 volume: int = 0,
-                 flowrate: int = 0,
-                 titer: Optional[float] = None,
-                 molarity: Optional[float] = None):
+                 type,
+                 substrate,
+                 volume,
+                 flowrate,
+                 titer,
+                 molarity):
 
         self._type = type
         self.substrate = None if substrate is None else substrate.upper()
@@ -57,7 +63,7 @@ class Injection:
         self.titer = titer
         self.molarity = molarity
         self.injection_coordinates = None
-        self.injection_angle = 90  # TODO update unit testing
+        self.injection_angle = 90
 
     @property
     def type(self):

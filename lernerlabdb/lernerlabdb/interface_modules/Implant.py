@@ -35,19 +35,21 @@ class Implant:
         >>> print(implant)
         Implant(type = OPTO, angle = 90), Implant Coordinates: Coordinates(ap=1, ml=2, dv=3)
     """
+    implant_type: ImplantType
+    angle: Optional[int] = 90
 
-    def __init__(self, type: ImplantType, angle: Optional[int] = 90):
+    def __init__(self, implant_type, angle=90):
 
         # ? do we add metrics for the type: ie length, diameter, NA, etc?
-        self._type = type
+        self._implant_type = implant_type
         self.angle = angle
         self.implant_coordinates = None
 
     @property
-    def type(self) -> str:
-        return self._type.value
+    def implant_type(self) -> str:
+        return self._implant_type.value
 
-    def adjust_implant_coordinates(self, ap, ml, dv,coordinates = Coordinates):
+    def adjust_implant_coordinates(self, ap, ml, dv, coordinates=Coordinates):
         """
         Adjusts the coordinates of the implant.
 
@@ -72,7 +74,7 @@ class Implant:
             dictionary of implant data
         """
         data = {
-            "type": self.type,
+            "type": self.implant_type,
             "angle": self.angle,
             "coordinates": self.implant_coordinates.coordinates if self.implant_coordinates is not None else None
         }

@@ -2,7 +2,11 @@ from typing import Dict
 
 
 class Coordinates:
-    def __init__(self, ap: float = 0., ml: float = 0., dv: float = 0.):
+    ap: float
+    ml: float
+    dv: float
+
+    def __init__(self, ap=0, ml=0, dv=0.):
         self.ap: float = ap
         self.ml: float = ml
         self.dv: float = dv
