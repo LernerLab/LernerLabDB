@@ -7,9 +7,8 @@ from lernerlabdb.interface_modules.enums import InjectionType
 
 
 class TestInjection:
-    def test_init(self):
-        injection = Injection(substrate="aav5-eGFP",
-                              type=InjectionType.VIRUS, volume=200, flowrate=100, titer=1.5)
+    def test_init(self, injection):
+
         assert injection.substrate == "AAV5-EGFP"
         assert injection.type == "Virus"
         assert injection.volume == 200
@@ -27,33 +26,29 @@ class TestInjection:
         assert defaults.titer is None
         assert defaults.molarity is None
 
-    def test_adjust_injection_coordinates(self):
-        inj = Injection(type=InjectionType.VIRUS)
-        inj.adjust_injection_coordinates(1, 2, 3)
-        inj.injection_coordinates.coordinates == {"AP": 1, "ML": 2, "DV": 3}
-        assert isinstance(inj.injection_coordinates, Coordinates)
+    def test_adjust_injection_coordinates(self, injection):
 
-    def test_injection_data(self):
-        inj = Injection(
-            substrate="AAV-dLIGHT1.3b",
-            type=InjectionType.VIRUS,
-            titer=1.0,
-            volume=500,
-            flowrate=100)
-        inj.adjust_injection_coordinates(1, 2, 3)
+        injection.adjust_injection_coordinates(3, 4, 5)
+        assert injection.injection_coordinates.coordinates == {
+            "AP": 3, "ML": 4, "DV": 5}
+        assert isinstance(injection.injection_coordinates, Coordinates)
 
-        expected = {'substrate': 'AAV-DLIGHT1.3B',
+    def test_injection_data(self, injection):
+
+        injection.adjust_injection_coordinates(1, 2, 3)
+
+        expected = {'substrate': "AAV5-EGFP",
                     'type': 'Virus',
-                    'volume(nL)': 500,
+                    'volume(nL)': 200,
                     'flowrate(nL/min)': 100,
-                    'titer(e12)': 1.0,
+                    'titer(e12)': 1.5,
                     'molarity(mM)': None,
                     'injection_coordinates': {'AP': 1, 'ML': 2, 'DV': 3},
                     'injection_angle': 90}
-        assert inj.data == expected
+        assert injection.data == expected
 
     def test_injection_data_no_cords(self):
-        inj = Injection(
+        injection = Injection(
             substrate="AAV-dLIGHT1.3b",
             type=InjectionType.VIRUS,
             titer=1.0,
@@ -68,4 +63,4 @@ class TestInjection:
                     'molarity(mM)': None,
                     'injection_coordinates': None,
                     'injection_angle': 90}
-        assert inj.data == expected
+        assert injection.data == expected

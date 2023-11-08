@@ -5,17 +5,6 @@ from lernerlabdb.interface_modules.enums import CageStatus, Location, Sex, Genot
 from lernerlabdb.interface_modules.Cage import Cage
 
 
-@pytest.fixture
-def cage():
-    return Cage(barcode=1,
-                cage_nickname='cage_fixture',
-                num_animals=3,
-                genotype=Genotype.WT,
-                sex=Sex.FEMALE,
-                date_of_birth=date(2021, 1, 1),
-                location=Location.W15W_019,
-                status=CageStatus.ACTIVE)
-
 
 class TestCage:
 
