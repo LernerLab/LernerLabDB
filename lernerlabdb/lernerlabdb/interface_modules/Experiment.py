@@ -1,6 +1,8 @@
-from lernerlabdb.interface_modules.Mouse import Mouse
+
 from lernerlabdb.interface_modules.Note import Note
-from typing import List
+from typing import List, NewType
+
+from lernerlabdb.interface_modules.Mouse import Mouse
 
 
 class Experiment:
@@ -42,3 +44,4 @@ class Experiment:
             "mice": [mouse.data for mouse in self.mice],
             "notes": [note.data for note in self.notes]
         }
+        return data

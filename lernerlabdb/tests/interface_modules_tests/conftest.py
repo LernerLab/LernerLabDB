@@ -12,6 +12,7 @@ from lernerlabdb.interface_modules.Note import Note
 from lernerlabdb.interface_modules.Scientist import Scientist
 from lernerlabdb.interface_modules.Surgery import Surgery
 from lernerlabdb.interface_modules.Injection import Injection
+from lernerlabdb.interface_modules.Project import Project
 
 from lernerlabdb.interface_modules.enums import ImplantType, DrugType, CageStatus, Location, Sex, Genotype, Zygosity, NoteType, InjectionType
 
@@ -83,7 +84,7 @@ def mouse1(scientist):
         A Mouse object with specific attributes.
     """
     mouse = Mouse(
-        date_of_birth=date(2020, 1, 1),
+        date_of_birth=datetime(2020, 1, 1),
         sex=Sex.FEMALE,
         ear_tag=2,
         genotype=Genotype.WT,
@@ -109,7 +110,7 @@ def mouse2(scientist):
         Another Mouse object with specific attributes.
     """
     mouse = Mouse(
-        date_of_birth=date(2020, 1, 1),
+        date_of_birth=datetime(2020, 1, 1),
         sex=Sex.MALE,
         ear_tag=1,
         genotype=Genotype.WT,
@@ -167,6 +168,33 @@ def experiment():
 
 
 @pytest.fixture
+def experiment2():
+    return Experiment(
+        experiment_name='experiment_fixture2'
+    )
+
+
+@pytest.fixture
 def injection():
     return Injection(substrate="aav5-eGFP",
                      type=InjectionType.VIRUS, volume=200, flowrate=100, titer=1.5)
+
+
+@pytest.fixture
+def surgery1():
+    return Surgery(1)
+
+
+@pytest.fixture
+def surgery2():
+    return Surgery(2)
+
+
+@pytest.fixture
+def project1():
+    return Project('project1')
+
+
+@pytest.fixture
+def project2():
+    return Project('project2')
