@@ -1,8 +1,6 @@
 from typing import List, NewType
 
 
-
-
 class Project:
     project_tile: str
 
