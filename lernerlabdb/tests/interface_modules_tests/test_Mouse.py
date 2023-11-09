@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 import pytest
 from unittest.mock import Mock, patch
 import uuid
@@ -11,128 +11,58 @@ from lernerlabdb.interface_modules.Experiment import Experiment
 from lernerlabdb.interface_modules.Scientist import Scientist
 from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype, Location, CageStatus, NoteType
 
-
-@pytest.fixture
-def cage():
-    return Cage(
-        barcode=1,
-        cage_nickname='cage_fixture',
-        num_animals=3,
-        genotype=Genotype.WT,
-        sex=Sex.FEMALE,
-        date_of_birth=datetime(2020, 1, 1),
-        location=Location.W15W_019,
-        status=CageStatus.ACTIVE
-    )
-
-
-@pytest.fixture
-def experiment():
-    return Experiment(
-    )
-
-
-@pytest.fixture
-def note():
-    return Note(
-        type=NoteType.SURGERY,
-        note='test'
-    )
-
-
-@pytest.fixture
-def scientist1():
-    return Scientist(
-        first_name='test',
-        last_name='test',
-        email='test',
-        net_id='test'
-    )
-
-
-@pytest.fixture
-def scientist2():
-    return Scientist(
-        first_name='new',
-        last_name='scientist',
-        email='other test',
-        net_id='test'
-    )
-
-
-@pytest.fixture
-def surgery1():
-    return Surgery(surgery_number=1)
-
-
-@pytest.fixture
-def surgery2():
-    return Surgery(surgery_number=2)
-
-
+#TODO finish conftests and run tests
 class TestMouse:
 
-    @pytest.fixture
-    def default_mouse(self, scientist1):
-        mouse = Mouse(
-            date_of_birth=datetime(2020, 1, 1),
-            sex=Sex.FEMALE,
-            ear_tag=1,
-            genotype=Genotype.WT,
-            zygosity=Zygosity.HOMOZYGOUS,
-            experiment_owner=scientist1
-        )
-        return mouse
-
-    def test_init(self, default_mouse):
-        assert default_mouse.age_ == {
-            "days": (datetime.now() - default_mouse.date_of_birth).days,
-            'weeks': ((datetime.now() - default_mouse.date_of_birth).days)//7,
+    def test_init(self, mouse1):
+        assert mouse1.age_ == {
+            "days": (datetime.now() - mouse1.date_of_birth).days,
+            'weeks': ((datetime.now() - mouse1.date_of_birth).days)//7,
             'days since first surgery': 0,
             'weeks since first surgery': 0}
-        assert isinstance(default_mouse._unique_id, uuid.UUID)
-        assert isinstance(default_mouse.unique_id, str)
-        assert default_mouse.sex == 'Female'
-        assert default_mouse.ear_tag == 1
-        assert default_mouse.genotype == 'Wildtype'
-        assert default_mouse.zygosity == 'Homozygous'
-        assert default_mouse.status == 'Alive'
-        assert default_mouse.surgeon == default_mouse.experiment_owner
-        assert default_mouse.cage is None
-        assert default_mouse.surgeries == []
-        assert default_mouse.notes == []
-        assert default_mouse.experimental_data == []
+        assert isinstance(mouse1._unique_id, uuid.UUID)
+        assert isinstance(mouse1.unique_id, str)
+        assert mouse1.sex == 'Female'
+        assert mouse1.ear_tag == 2
+        assert mouse1.genotype == 'Wildtype'
+        assert mouse1.zygosity == 'Homozygous'
+        assert mouse1.status == 'Alive'
+        assert mouse1.surgeon == mouse1.experiment_owner
+        assert mouse1.cage is None
+        assert mouse1.surgeries == []
+        assert mouse1.notes == []
+        assert mouse1.experimental_data == []
 
-    def test_update_zygosity(self, default_mouse):
-        default_mouse.update_zygosity(Zygosity.HETEROZYGOUS)
-        assert default_mouse.zygosity == 'Heterozygous'
+    def test_update_zygosity(self, mouse1):
+        mouse1.update_zygosity(Zygosity.HETEROZYGOUS)
+        assert mouse1.zygosity == 'Heterozygous'
 
-    def test_attach_to_cage(self, default_mouse, cage):
-        default_mouse.attach_to_cage(cage)
-        assert default_mouse.cage == cage
+    def test_attach_to_cage(self, mouse1, cage):
+        mouse1.attach_to_cage(cage)
+        assert mouse1.cage == cage
 
-    def test_add_note(self, default_mouse, note):
-        default_mouse.add_note(note)
-        assert default_mouse.notes == [note]
+    def test_add_note(self, mouse1, note1):
+        mouse1.add_note(note1)
+        assert mouse1.notes == [note1]
 
-    def test_add_surgeries(self, default_mouse, surgery1, surgery2):
-        default_mouse.add_surgeries(surgery1, surgery2)
-        assert default_mouse.surgeries == [surgery1, surgery2]
+    def test_add_surgeries(self, mouse1, surgery1, surgery2):
+        mouse1.add_surgeries(surgery1, surgery2)
+        assert mouse1.surgeries == [surgery1, surgery2]
 
-    def test_mouse_data_property(self, default_mouse):
-        data = default_mouse.data
+    def test_mouse_data_property(self, mouse1):
+        data = mouse1.data
         assert isinstance(data, dict)
-        assert data['unique id'] == default_mouse.unique_id
-        assert data['cage'] == default_mouse.cage
-        assert data['ear tag'] == default_mouse.ear_tag
-        assert data['sex'] == default_mouse.sex
-        assert data['genotype'] == default_mouse.genotype
-        assert data['zygosity'] == default_mouse.zygosity
-        assert data['date of birth'] == default_mouse.date_of_birth
-        assert data['status'] == default_mouse.status
-        assert data['experiment_owner'] == default_mouse.experiment_owner
-        assert data['surgeon'] == default_mouse.surgeon
-        assert data['age'] == default_mouse.age_
+        assert data['unique id'] == mouse1.unique_id
+        assert data['cage'] == mouse1.cage
+        assert data['ear tag'] == mouse1.ear_tag
+        assert data['sex'] == mouse1.sex
+        assert data['genotype'] == mouse1.genotype
+        assert data['zygosity'] == mouse1.zygosity
+        assert data['date of birth'] == mouse1.date_of_birth
+        assert data['status'] == mouse1.status
+        assert data['experiment_owner'] == mouse1.experiment_owner
+        assert data['surgeon'] == mouse1.surgeon
+        assert data['age'] == mouse1.age_
         assert data['surgeries'] == [
-            surgery.data for surgery in default_mouse.surgeries]
-        assert data['notes'] == [note.data for note in default_mouse.notes]
+            surgery.data for surgery in mouse1.surgeries]
+        assert data['notes'] == [note.data for note in mouse1.notes]

@@ -33,9 +33,9 @@ class Mouse:
                  genotype,
                  zygosity,
                  experiment_owner,
-                 surgeon,
-                 cage,
-                 status
+                 status=MouseStatus.ALIVE,
+                 surgeon=None,
+                 cage=None
                  ):
         self._unique_id = uuid4()
         self._date_of_birth = date_of_birth
@@ -52,7 +52,7 @@ class Mouse:
             self._surgeon = surgeon
         self._experiment_owner = experiment_owner
         self._cage = cage
-        self._status: MouseStatus = MouseStatus.ALIVE
+        self._status = status
         self._surgeries: List[Surgery] = []
         self._notes: List[Note] = []
         self._experimental_data: List[ExperimentalData] = []
