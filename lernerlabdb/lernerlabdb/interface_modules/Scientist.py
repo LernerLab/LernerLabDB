@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from lernerlabdb.interface_modules.Project import Project
 from typing import List
 
-#! UNIT TESTS STILL NEED TO BE DONE
 
 
 class Scientist:
