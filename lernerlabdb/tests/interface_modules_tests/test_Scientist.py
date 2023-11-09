@@ -16,7 +16,7 @@ class TestScientist:
         assert scientist.projects == [project1, project2]
         assert scientist.projects[0] == project1
         assert scientist.projects[1] == project2
-        
+
     def test_data_property(self, scientist, project1):
         scientist.add_project(project1)
         data = scientist.data
@@ -26,4 +26,3 @@ class TestScientist:
         assert data['email'] == scientist.email
         assert data['net_id'] == scientist.net_id
         assert data['projects'] == [project1.data]
-        
