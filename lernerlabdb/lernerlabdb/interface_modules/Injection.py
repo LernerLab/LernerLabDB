@@ -49,14 +49,14 @@ class Injection:
     molarity: Optional[float] = None
 
     def __init__(self,
-                 type,
-                 substrate,
-                 volume,
-                 flowrate,
-                 titer,
-                 molarity):
+                 injection_type,
+                 substrate=None,
+                 volume=0,
+                 flowrate=0,
+                 titer=None,
+                 molarity=None):
 
-        self._type = type
+        self._injection_type = injection_type
         self.substrate = None if substrate is None else substrate.upper()
         self.volume = volume
         self.flowrate = flowrate
@@ -66,8 +66,8 @@ class Injection:
         self.injection_angle = 90
 
     @property
-    def type(self):
-        return self._type.value
+    def injection_type(self):
+        return self._injection_type.value
 
     def adjust_injection_coordinates(self, ap, ml, dv):
         """
@@ -102,7 +102,7 @@ class Injection:
         """
         data = {
             "substrate": self.substrate,
-            "type": self.type,
+            "injection_type": self.injection_type,
             "volume(nL)": self.volume,
             "flowrate(nL/min)": self.flowrate,
             "titer(e12)": self.titer,

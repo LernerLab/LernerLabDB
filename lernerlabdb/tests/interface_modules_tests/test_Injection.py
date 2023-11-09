@@ -10,7 +10,7 @@ class TestInjection:
     def test_init(self, injection):
 
         assert injection.substrate == "AAV5-EGFP"
-        assert injection.type == "Virus"
+        assert injection.injection_type == "Virus"
         assert injection.volume == 200
         assert injection.flowrate == 100
         assert injection.titer == 1.5
@@ -18,9 +18,9 @@ class TestInjection:
 
     def test_init_defaults(self):
 
-        defaults = Injection(type=InjectionType.VIRUS)
+        defaults = Injection(injection_type=InjectionType.VIRUS)
         assert defaults.substrate is None
-        assert defaults.type == "Virus"
+        assert defaults.injection_type == "Virus"
         assert defaults.volume == 0
         assert defaults.flowrate == 0
         assert defaults.titer is None
@@ -38,7 +38,7 @@ class TestInjection:
         injection.adjust_injection_coordinates(1, 2, 3)
 
         expected = {'substrate': "AAV5-EGFP",
-                    'type': 'Virus',
+                    'injection_type': 'Virus',
                     'volume(nL)': 200,
                     'flowrate(nL/min)': 100,
                     'titer(e12)': 1.5,
@@ -50,13 +50,13 @@ class TestInjection:
     def test_injection_data_no_cords(self):
         injection = Injection(
             substrate="AAV-dLIGHT1.3b",
-            type=InjectionType.VIRUS,
+            injection_type=InjectionType.VIRUS,
             titer=1.0,
             volume=500,
             flowrate=100)
 
         expected = {'substrate': 'AAV-DLIGHT1.3B',
-                    'type': 'Virus',
+                    'injection_type': 'Virus',
                     'volume(nL)': 500,
                     'flowrate(nL/min)': 100,
                     'titer(e12)': 1.0,
