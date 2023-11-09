@@ -177,7 +177,7 @@ def experiment2():
 @pytest.fixture
 def injection():
     return Injection(substrate="aav5-eGFP",
-                     type=InjectionType.VIRUS, volume=200, flowrate=100, titer=1.5)
+                     injection_type=InjectionType.VIRUS, volume=200, flowrate=100, titer=1.5)
 
 
 @pytest.fixture
