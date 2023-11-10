@@ -78,26 +78,16 @@ class Cage:
     {'barcode': 12345, 'cage_nickname': 'TestCage', 'parent_cage': None, 'num_animals': 5, 'genotype': 'WildType', 'sex': 'Female', 'age': None, 'location': 'Lab', 'status': 'DEACTIVATED'}
     """
 
-    barcode: int
-    cage_nickname: str
-    num_animals: int
-    genotype: Genotype
-    sex: Sex
-    date_of_birth: Date
-    location: Location
-    status: CageStatus
-    parent_cage_barcode: Optional[int]
-
     def __init__(self,
-                 barcode,
-                 cage_nickname,
-                 num_animals,
-                 genotype,
-                 sex,
-                 date_of_birth,
-                 location,
-                 status=CageStatus.ACTIVE,
-                 parent_cage_barcode=None):
+                 barcode: int,
+                 cage_nickname: str,
+                 num_animals: int,
+                 genotype: Genotype,
+                 sex: Sex,
+                 date_of_birth: Date,
+                 location: Location,
+                 status: CageStatus,
+                 parent_cage_barcode: Optional[int] = None):
 
         self._barcode = barcode
         self._cage_nickname = cage_nickname
@@ -173,8 +163,9 @@ class Cage:
     def location(self) -> str:
         """
         returs the Location value
-        return self._location.value
         """
+        return self._location.value
+
     @property
     def status(self) -> str:
         """
@@ -204,7 +195,7 @@ class Cage:
             "num_animals": self.num_animals,
             'genotype': self.genotype,
             "sex": self.sex,
-            "age": self.age,
+            # "age": self.age,
             "location": self.location,
             "status": self.status
         }
