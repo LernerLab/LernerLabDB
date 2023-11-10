@@ -1,29 +1,66 @@
 
-from lernerlabdb.interface_modules.Note import Note
-from typing import List, NewType
-
+from typing import List, Dict, Any
 from lernerlabdb.interface_modules.Mouse import Mouse
+from lernerlabdb.interface_modules.Note import Note
 
 
 class Experiment:
-    experiment_name: str
-    mice: List[Mouse]
-    notes: List[Note]
-    
+
+    """
+    Represents an experiment conducted in the lab.
+
+    Parameters
+    ----------
+    experiment_name : str
+        The name of the experiment.
+
+    Attributes
+    ----------
+    experiment_name : str
+        The name of the experiment.
+    _mice : List[Mouse]
+        A list of Mouse objects associated with the experiment.
+    _notes : List[Note]
+        A list of Note objects associated with the experiment.
+
+    Methods
+    -------
+    mice() -> List[Mouse]
+        Returns a list of Mouse objects associated with the experiment.
+    notes() -> List[Note]
+        Returns a list of Note objects associated with the experiment.
+    add_mice(*mice) -> None
+        Adds one or more Mouse objects to the experiment.
+    add_notes(*notes) -> None
+        Adds one or more Note objects to the experiment.
+    data() -> dict
+        Returns a dictionary representation of the experiment data.
+    """
+
     def __init__(self, experiment_name):
-        self.experiment_name = experiment_name
-        self._mice = []
-        self._notes= []
+        self.experiment_name:str = experiment_name
+        self._mice:List[Mouse] = []
+        self._notes:List[Note] = []
 
     @property
-    def mice(self):
+    def mice(self)-> List[Mouse]:
+        """
+        Returns a list of Mouse objects associated with the experiment.
+        """
         return self._mice
 
     @property
-    def notes(self):
+    def notes(self) -> List[Note]:
+        """
+        Returns a list of Note objects associated with the experiment.
+        """
+        
         return self._notes
 
-    def add_mice(self, *mice):
+    def add_mice(self, *mice)-> None:
+        """
+        Adds one or more Mouse objects to the experiment.
+        """
         for mouse in mice:
             if isinstance(mouse, list):
                 self._mice.extend(mouse)
@@ -31,6 +68,9 @@ class Experiment:
                 self._mice.append(mouse)
 
     def add_notes(self, *notes):
+        """
+        Adds one or more Note objects to the experiment.
+        """
         for note in notes:
             if isinstance(note, list):
                 self._notes.extend(note)
@@ -38,7 +78,8 @@ class Experiment:
                 self._notes.append(note)
 
     @property
-    def data(self):
+    def data(self)->Dict[str, Any]:
+        """Returns a dictionary representation of the experiment data."""
         data = {
             "experiment_name": self.experiment_name,
             "mice": [mouse.data for mouse in self.mice],

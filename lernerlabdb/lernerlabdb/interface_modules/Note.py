@@ -23,16 +23,13 @@ class Note:
         ValueError: If the `type` argument is not one of the allowed options.
 
     """
-    date: Date
-    time: Time
-    type: NoteType
-    note: str
+
 
     def __init__(self,
-                 type,
-                 note):
-        self.date = datetime.now().date()
-        self.time = datetime.now().time()
+                 type:NoteType,
+                 note:str):
+        self.date: Date = datetime.now().date()
+        self.time:Time = datetime.now().time()
         self._type = type
         self.note = note
 

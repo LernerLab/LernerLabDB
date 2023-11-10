@@ -74,7 +74,7 @@ class Implant:
             dictionary of implant data
         """
         data = {
-            "type": self.implant_type,
+            "implant_type": self.implant_type,
             "angle": self.angle,
             "coordinates": self.implant_coordinates.coordinates if self.implant_coordinates is not None else None
         }

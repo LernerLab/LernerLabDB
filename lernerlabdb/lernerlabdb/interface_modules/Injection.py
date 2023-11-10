@@ -14,7 +14,7 @@ class Injection:
         Unique identifier for the injection, by default 1
     substrate : str, optional
         Substrate where the injection is applied, by default None
-    type : str, optional
+    injection_type : str, optional
         Type of injection (e.g., "virus", "tracer", "dye", "cytotoxic", "drug", "other"), 
         by default None
     volume : int, optional
@@ -25,6 +25,10 @@ class Injection:
         Titer of the injection, by default None
     molarity : float, optional
         Molarity of the injection, by default None
+    injection_coordinates : Coordinates, optional
+        Coordinates where the injection is applied, by default None
+    injection_angle : int, optional
+        Angle of the injection, by default 90 degress
 
     Methods
     -------
@@ -41,20 +45,14 @@ class Injection:
     >>> print(injection1)
     Injection(Injection Number: 1, Subtrate: avv5-eGFP, Type: virus, Volume: 200nL, Flowrate: 100nL/min, Titer: 1.5e12, Molarity: None mM, Injection Coordinates: Coordinates(AP: 1, ML: 2, DV: 3))
     """
-    type: InjectionType
-    substrate: Optional[str] = None
-    volume: int = 0
-    flowrate: int = 0
-    titer: Optional[float] = None
-    molarity: Optional[float] = None
 
     def __init__(self,
-                 injection_type,
-                 substrate=None,
-                 volume=0,
-                 flowrate=0,
-                 titer=None,
-                 molarity=None):
+                injection_type: InjectionType,
+                substrate: Optional[str] = None,
+                volume: int = 0,
+                flowrate: int = 0,
+                titer: Optional[float] = None,
+                molarity: Optional[float] = None):
 
         self._injection_type = injection_type
         self.substrate = None if substrate is None else substrate.upper()
@@ -66,39 +64,25 @@ class Injection:
         self.injection_angle = 90
 
     @property
-    def injection_type(self):
+    def injection_type(self)->str:
+        """
+        Returns the type of injection
+
+        """
         return self._injection_type.value
 
     def adjust_injection_coordinates(self, ap, ml, dv):
         """
-        Adjusts the coordinates where the injection is applied.
+        Pseodo setter for injection_coordinates. Adjusts the coordinates where the injection is applied.
 
-        Parameters
-        ----------
-        ap : float
-            Anteroposterior coordinate
-        ml : float
-            Mediolateral coordinate
-        dv : float
-            Dorsoventral coordinate
         """
         self.injection_coordinates = Coordinates(ap, ml, dv)
 
     @property
     def data(self) -> dict:
         """
-        ### Returns the injection data as a dictionary.
-        serves as a substitute for __repr__ for the purpose of json serialization without overriding __dir__ or __repr__
-
-        Parameters
-        ----------
-        self : Injection
-            The current instance of the Injection class.
-
-        Returns
-        -------
-        dict
-            A dictionary containing the injection data.
+        Returns a dictionary representation of the injection data.
+        
         """
         data = {
             "substrate": self.substrate,

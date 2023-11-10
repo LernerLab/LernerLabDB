@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import Dict, Any
 from lernerlabdb.interface_modules.enums import DrugType
 
 
@@ -22,8 +22,8 @@ class Drug:
 
     Attributes
     ----------
-    substance : str
-        The name of the drug substance. Must be one of "BupeSR", "Bupivicaine", or "Meloxicam".
+    substance : LiteralString
+        returns "BupeSR", "Bupivicaine", or "Meloxicam".
     dose : float
         The dose of the drug in milligrams per kilogram of body weight.
     volume_administered : float
@@ -35,18 +35,20 @@ class Drug:
         Returns a dictionary containing the drug's substance, dose, and volume administered.
     """
 
-    substance: DrugType
-    dose: float
-    volume_administered: float
-
-    def __init__(self, substance, dose, volume_administered):
+    def __init__(self,
+                 substance: DrugType,
+                 dose: float,
+                 volume_administered: float):
 
         self._substance = substance
         self.dose = dose
         self.volume_administered = volume_administered
 
     @property
-    def substance(self):
+    def substance(self) -> str:
+        """
+        returns the substance of the drug : BupeSR, Bupivicaine, or Meloxicam
+        """
         return self._substance.value
 
     @property
@@ -54,10 +56,6 @@ class Drug:
         """
         Returns a dictionary containing the drug's substance, dose, and volume administered.
 
-        Returns
-        -------
-        dict
-            A dictionary containing the drug's substance, dose, and volume administered.
         """
         data = {
             "substance": self.substance,
