@@ -10,15 +10,40 @@ from lernerlabdb.interface_modules.Implant import Implant
 from lernerlabdb.interface_modules.Mouse import Mouse
 from lernerlabdb.interface_modules.Note import Note
 from lernerlabdb.interface_modules.Scientist import Scientist
+from lernerlabdb.interface_modules.Structure import Structure
 from lernerlabdb.interface_modules.Surgery import Surgery
 from lernerlabdb.interface_modules.Injection import Injection
 from lernerlabdb.interface_modules.Project import Project
+from lernerlabdb.interface_modules.Procedure import Procedure
 
-from lernerlabdb.interface_modules.enums import ImplantType, DrugType, CageStatus, Location, Sex, Genotype, Zygosity, NoteType, InjectionType
+from lernerlabdb.interface_modules.enums import *
+
+
+@pytest.fixture
+def structure():
+    return Structure("Lateral Hypothalamic Area",
+                     "LHA", Hemisphere.LEFT, (-1.6, 0.9, -4.9))
+
+
+@pytest.fixture
+def injection():
+    return Injection(substrate="AAV-dLIGHT1.3b", injection_type=InjectionType.VIRUS,
+                     titer=1.0, volume=500, flowrate=100)
+
+
+@pytest.fixture
+def injection2():
+    return Injection(substrate="AAV-dLIGHT1.3b", injection_type=InjectionType.VIRUS,
+                     titer=1.0, volume=500, flowrate=100)
 
 
 @pytest.fixture
 def implant():
+    return Implant(implant_type=ImplantType.OPTO)
+
+
+@pytest.fixture
+def implant2():
     return Implant(implant_type=ImplantType.OPTO)
 
 
@@ -198,3 +223,8 @@ def project1():
 @pytest.fixture
 def project2():
     return Project('project2')
+
+
+@pytest.fixture
+def procedure():
+    return Procedure("test_procedure", 1)

@@ -4,8 +4,6 @@ from lernerlabdb.interface_modules.Coordinates import Coordinates
 from lernerlabdb.interface_modules.enums import ImplantType
 
 
-
-
 class TestImplant:
 
     def test_init(self, implant):
@@ -22,13 +20,13 @@ class TestImplant:
 
     def test_implant_data(self, implant):
         implant.adjust_implant_coordinates(ap=1, ml=2, dv=3)
-        expected = {"type": "Opto", "angle": 90,
+        expected = {"implant_type": "Opto", "angle": 90,
                     "coordinates": {"AP": 1, "ML": 2, "DV": 3}}
 
         assert implant.data == expected
 
     def test_implant_data_no_coordinates(self, implant):
-        expected = {"type": implant.implant_type, "angle": 90,
+        expected = {"implant_type": implant.implant_type, "angle": 90,
                     "coordinates": None}
 
         assert implant.data == expected

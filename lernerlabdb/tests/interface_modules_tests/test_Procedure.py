@@ -1,3 +1,5 @@
+
+import pytest
 from lernerlabdb.interface_modules.Structure import Structure
 from lernerlabdb.interface_modules.Implant import Implant
 from lernerlabdb.interface_modules.Injection import Injection
@@ -9,15 +11,6 @@ from lernerlabdb.interface_modules.enums import ImplantType, Hemisphere
 # Test Procedure class
 
 
-@pytest.fixture
-def procedure():
-    return Procedure("test_procedure", 1)
-
-
-@pytest.fixture
-def structure():
-    return Structure("Lateral Hypothalamic Area",
-                     "LHA", Hemisphere.LEFT, (-1.6, 0.9, -4.9))
 
 
 class TestProcedure:
