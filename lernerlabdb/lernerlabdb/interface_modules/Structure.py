@@ -68,8 +68,13 @@ class Structure:
     def number_of_injections(self):
         return len(self._injections)
 
-    def add_injection(self, injection: Injection):
-        self._injections.append(injection)
+    def add_injections(self, *injections: Injection):
+
+        for injection in injections:
+            if isinstance(injection, list):
+                self._injections.extend(injection)
+            else:
+                self._injections.append(injection)
 
     def remove_injection(self, injection: Injection):
         self._injections.remove(injection)
@@ -82,8 +87,12 @@ class Structure:
     def number_of_implants(self):
         return len(self._implants)
 
-    def add_implant(self, implant: Implant):
-        self._implants.append(implant)
+    def add_implants(self, *implants: Implant):
+        for implant in implants:
+            if isinstance(implant, list):
+                self._implants.extend(implant)
+            else:
+                self._implants.append(implant)
 
     def remove_implant(self, implant: Implant):
         self._implants.remove(implant)
