@@ -44,6 +44,7 @@ class ImplantType(Enum):
     LENS = 'Lens'
     FIBER_OPTIC = 'Fiber Optic'
     PELLET = 'Pellet'
+    MICRO = "Microdialysis"
 
 
 class Hemisphere(Enum):
@@ -65,6 +66,7 @@ class NoteType(Enum):
     SURGERY = 'Surgery'
     RECOVERY = 'Recovery'
     EXPERIMENTAL = 'Experimental'
+    POSTMORTEM = 'Postmortem'
     OTHER = 'Other'
 
 
