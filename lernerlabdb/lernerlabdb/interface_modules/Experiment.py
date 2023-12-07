@@ -1,7 +1,7 @@
 
 from typing import List, Dict, Any
-from lernerlabdb.interface_modules.Mouse import Mouse
-from lernerlabdb.interface_modules.Note import Note
+from lernerlabdb.interface_modules.mouse import Mouse
+from lernerlabdb.interface_modules.note import Note
 
 
 class Experiment:

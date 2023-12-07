@@ -1,6 +1,6 @@
-from lernerlabdb.interface_modules.Coordinates import Coordinates
-from lernerlabdb.interface_modules.Injection import Injection
-from lernerlabdb.interface_modules.Implant import Implant
+from lernerlabdb.interface_modules.coordinates import Coordinates
+from lernerlabdb.interface_modules.injection import Injection
+from lernerlabdb.interface_modules.implant import Implant
 from lernerlabdb.interface_modules.enums import ImplantType, Hemisphere
 
 from typing import Optional, List, Tuple

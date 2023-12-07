@@ -2,11 +2,11 @@ from datetime import datetime, date, time, timedelta
 from typing import List, Dict, Any, Optional, Literal, NewType
 from uuid import uuid4
 
-from lernerlabdb.interface_modules.Cage import Cage
-from lernerlabdb.interface_modules.Surgery import Surgery
-from lernerlabdb.interface_modules.Note import Note
-from lernerlabdb.interface_modules.ExperimentalData import ExperimentalData
-from lernerlabdb.interface_modules.Scientist import Scientist
+from lernerlabdb.interface_modules.cage import Cage
+from lernerlabdb.interface_modules.surgery import Surgery
+from lernerlabdb.interface_modules.note import Note
+from lernerlabdb.interface_modules.experimentalData import ExperimentalData
+from lernerlabdb.interface_modules.scientist import Scientist
 from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype
 
 Date = NewType('Date', date)

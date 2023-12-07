@@ -1,5 +1,5 @@
 from typing import Optional
-from lernerlabdb.interface_modules.Coordinates import Coordinates
+from lernerlabdb.interface_modules.coordinates import Coordinates
 from lernerlabdb.interface_modules.enums import ImplantType
 
 

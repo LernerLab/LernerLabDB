@@ -1,5 +1,5 @@
 
-from lernerlabdb.interface_modules.Project import Project
+from lernerlabdb.interface_modules.project import Project
 from typing import List, Dict, Any
 
 

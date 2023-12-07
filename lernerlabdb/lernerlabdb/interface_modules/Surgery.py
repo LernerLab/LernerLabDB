@@ -1,9 +1,9 @@
 from datetime import datetime
 from typing import List, Dict, Any, NewType
 
-from lernerlabdb.interface_modules.Drug import Drug
-from lernerlabdb.interface_modules.Note import Note
-from lernerlabdb.interface_modules.Procedure import Procedure
+from lernerlabdb.interface_modules.drug import Drug
+from lernerlabdb.interface_modules.note import Note
+from lernerlabdb.interface_modules.procedure import Procedure
 
 
 Date = NewType('Date', datetime.date)

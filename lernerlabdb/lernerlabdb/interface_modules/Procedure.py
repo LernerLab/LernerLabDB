@@ -1,4 +1,4 @@
-from lernerlabdb.interface_modules.Structure import Structure
+from lernerlabdb.interface_modules.structure import Structure
 from typing import List, Dict, Any
 
 
