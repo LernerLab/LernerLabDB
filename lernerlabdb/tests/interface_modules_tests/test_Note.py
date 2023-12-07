@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime
 
-from lernerlabdb.interface_modules.Note import Note
+from lernerlabdb.interface_modules.note import Note
 from lernerlabdb.interface_modules.enums import NoteType
 
 

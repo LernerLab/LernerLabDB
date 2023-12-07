@@ -1,6 +1,6 @@
 import pytest
 
-from lernerlabdb.interface_modules.Scientist import Scientist
+from lernerlabdb.interface_modules.scientist import Scientist
 
 
 class TestScientist:

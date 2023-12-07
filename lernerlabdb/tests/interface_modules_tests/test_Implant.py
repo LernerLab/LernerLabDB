@@ -1,6 +1,6 @@
 import pytest
-from lernerlabdb.interface_modules.Implant import Implant
-from lernerlabdb.interface_modules.Coordinates import Coordinates
+from lernerlabdb.interface_modules.implant import Implant
+from lernerlabdb.interface_modules.coordinates import Coordinates
 from lernerlabdb.interface_modules.enums import ImplantType
 
 

@@ -2,8 +2,7 @@ import pytest
 from datetime import datetime, date, time, timedelta
 from lernerlabdb.interface_modules.enums import CageStatus, Location, Sex, Genotype
 
-from lernerlabdb.interface_modules.Cage import Cage
-
+from lernerlabdb.interface_modules.cage import Cage
 
 
 class TestCage:

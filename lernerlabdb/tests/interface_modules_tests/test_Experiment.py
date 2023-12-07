@@ -2,10 +2,10 @@
 import pytest
 from datetime import date
 
-from lernerlabdb.interface_modules.Experiment import Experiment
-from lernerlabdb.interface_modules.Scientist import Scientist
-from lernerlabdb.interface_modules.Mouse import Mouse
-from lernerlabdb.interface_modules.Note import Note
+from lernerlabdb.interface_modules.experiment import Experiment
+from lernerlabdb.interface_modules.scientist import Scientist
+from lernerlabdb.interface_modules.mouse import Mouse
+from lernerlabdb.interface_modules.note import Note
 
 from lernerlabdb.interface_modules.enums import Sex, Genotype, Zygosity, NoteType
 

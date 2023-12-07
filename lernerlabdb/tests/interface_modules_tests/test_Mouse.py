@@ -3,15 +3,17 @@ import pytest
 from unittest.mock import Mock, patch
 import uuid
 
-from lernerlabdb.interface_modules.Mouse import Mouse
-from lernerlabdb.interface_modules.Cage import Cage
-from lernerlabdb.interface_modules.Surgery import Surgery
-from lernerlabdb.interface_modules.Note import Note
-from lernerlabdb.interface_modules.Experiment import Experiment
-from lernerlabdb.interface_modules.Scientist import Scientist
+from lernerlabdb.interface_modules.mouse import Mouse
+from lernerlabdb.interface_modules.cage import Cage
+from lernerlabdb.interface_modules.surgery import Surgery
+from lernerlabdb.interface_modules.note import Note
+from lernerlabdb.interface_modules.experiment import Experiment
+from lernerlabdb.interface_modules.scientist import Scientist
 from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype, Location, CageStatus, NoteType
 
-#TODO finish conftests and run tests
+# TODO finish conftests and run tests
+
+
 class TestMouse:
 
     def test_init(self, mouse1):

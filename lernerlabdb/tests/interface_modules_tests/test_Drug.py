@@ -1,6 +1,6 @@
 
 import pytest
-from lernerlabdb.interface_modules.Drug import Drug
+from lernerlabdb.interface_modules.drug import Drug
 from lernerlabdb.interface_modules.enums import DrugType
 
 
