@@ -36,7 +36,9 @@ class AppUI:
 
     def render_user_interface(self):
         return ui.page_fluid(
+            shinyswatch.theme.darkly(),
             Sidebar.sidebar(),
+            ui.markdown("---"),
             self.navigation_cards(),
 
         )
@@ -45,4 +47,10 @@ class AppUI:
 user_interface = AppUI()
 
 
-app = App(user_interface.render_user_interface(), server=None)
+
+def server(input: Inputs, output: Outputs, session: Session):
+    shinyswatch.theme.darkly()
+    
+
+    
+app = App(user_interface.render_user_interface(), server = None)

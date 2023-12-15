@@ -48,10 +48,10 @@ class MouseInput:
     @property
     def column_layout(self):
         columns = ui.layout_column_wrap(
-            (self.status_selector, self.sex_radio, self.zygosity_selector),
-            (self.ear_tag_input, self.genotype_selector),
-            self.dob_selector,
-            width=1/6)
+            (self.status_selector, self.dob_selector,
+             self.sex_radio, self.ear_tag_input),
+            (self.genotype_selector, self.zygosity_selector),
+            width=1/4)
 
         return columns
 
@@ -60,6 +60,9 @@ class MouseInput:
         mouse_button = ui.input_action_button("mouse_input", "Add Mouse")
 
         mouse_form = ui.page_fillable(
-            self.column_layout, NoteInput().display_note_input(), mouse_button)
+            self.column_layout,
+            ui.markdown("---"),
+            NoteInput().display_note_input(),
+            mouse_button)
 
         return mouse_form

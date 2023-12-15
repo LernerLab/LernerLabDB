@@ -1,12 +1,10 @@
 from datetime import datetime
 from typing import List, Dict, Any, NewType
 
+from lernerlabdb.customs.custom_types import Date, Time, NumberOfDays
 from lernerlabdb.interface_modules.drug import Drug
 from lernerlabdb.interface_modules.note import Note
 from lernerlabdb.interface_modules.procedure import Procedure
-
-
-Date = NewType('Date', datetime.date)
 
 
 class Surgery:

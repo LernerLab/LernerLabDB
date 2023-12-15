@@ -1,18 +1,13 @@
 from datetime import datetime, date, time, timedelta
 from typing import List, Dict, Any, Optional, Literal, NewType
 from uuid import uuid4
-
+from lernerlabdb.customs.custom_types import Date, Time, NumberOfDays, NumberOfWeeks
 from lernerlabdb.interface_modules.cage import Cage
 from lernerlabdb.interface_modules.surgery import Surgery
 from lernerlabdb.interface_modules.note import Note
 from lernerlabdb.interface_modules.experimentalData import ExperimentalData
 from lernerlabdb.interface_modules.scientist import Scientist
 from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype
-
-Date = NewType('Date', date)
-Time = NewType('Time', time)
-NumberOfDays = NewType('NumberOfDays', int)
-NumberOfWeeks = NewType('NumberOfWeeks', int)
 
 
 class Mouse:

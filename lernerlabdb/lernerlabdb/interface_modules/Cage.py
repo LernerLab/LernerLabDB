@@ -3,13 +3,10 @@ import pandas as pd
 import gspread
 from datetime import datetime, date, time, timedelta
 from typing import Dict, Any, Optional, Literal, NewType
+
+from lernerlabdb.customs.custom_types import Date, Time, NumberOfDays, NumberOfWeeks
 from lernerlabdb.interface_modules.enums import CageStatus, Location, Sex, Genotype
 
-
-Date = NewType('Date', date)
-Time = NewType('Time', time)
-NumberOfDays = NewType('NumberOfDays', int)
-NumberOfWeeks = NewType('NumberOfWeeks', int)
 
 
 class Cage:

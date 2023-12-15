@@ -1,10 +1,9 @@
 from datetime import datetime
 from typing import Dict, NewType, Optional, Literal, Any
+
+from lernerlabdb.customs.custom_types import Date, Time, NumberOfDays
 from lernerlabdb.interface_modules.enums import NoteType
 
-
-Date = NewType("Date", datetime.date)
-Time = NewType("Time", datetime.time)
 
 
 class Note:
