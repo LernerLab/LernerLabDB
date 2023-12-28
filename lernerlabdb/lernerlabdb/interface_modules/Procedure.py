@@ -1,6 +1,6 @@
 from lernerlabdb.interface_modules.structure import Structure
 from typing import List, Dict, Any
-
+from uuid import uuid4
 
 class Procedure:
     """
@@ -33,11 +33,10 @@ class Procedure:
     id: int
 
     def __init__(self,
-                 name: str,
-                 id: int):
+                 name: str):
 
         self._name = name
-        self._id = id  # ! I think we need a way to auto-generate this and cross reference the db, but placeholder for now
+        self._id = uuid4()
         self._structures: List = []
 
     @property
@@ -47,8 +46,8 @@ class Procedure:
 
     @property
     def id(self) -> int:
-        '''The ID of the procedure'''
-        return self._id
+        '''returns then inti ID of the procedure'''
+        return self._id.int
 
     @property
     def structures(self):

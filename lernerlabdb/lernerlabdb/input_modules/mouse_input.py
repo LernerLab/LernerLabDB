@@ -6,8 +6,6 @@ from shiny import *
 
 
 class MouseInput:
-    def __init__(self):
-        pass
 
     @property
     def dob_selector(self):
