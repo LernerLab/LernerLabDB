@@ -1,15 +1,27 @@
 
-from enum import Enum
+from enum import Enum, StrEnum, auto
+
+
+class UpperStrEnum(StrEnum):
+    """ wrapper for str enums that modifies auto to convert to uppercase """
+    def _generate_next_value_(name, start, count, last_values):
+        return name.upper()
+
+
+class CaptitalStrEnum(StrEnum):
+    """ wrapper for str enums that modifies auto to convert to uppercase """
+    def _generate_next_value_(name, start, count, last_values):
+        return name.capitalize()
 
 
 class CageStatus(Enum):
-    ACTIVE = 'Active'
-    DEACTIVATED = 'Deactivated'
+    ACTIVE = auto()
+    DEACTIVATED = auto()
 
 
-class MouseStatus(Enum):
-    ALIVE = 'Alive'
-    DEAD = 'Dead'
+class MouseStatus(CaptitalStrEnum):
+    ALIVE = auto()
+    DEAD = auto()
 
 
 class Location(Enum):
@@ -19,55 +31,55 @@ class Location(Enum):
     SQB_835 = 'SQB_835'
 
 
-class Sex(Enum):
-    MALE = 'Male'
-    FEMALE = 'Female'
+class Sex(CaptitalStrEnum):
+    MALE = auto()
+    FEMALE = auto()
 
 
-class Zygosity(Enum):
-    WILDTYPE = 'Wildtype'
-    HOMOZYGOUS = 'Homozygous'
-    HETEROZYGOUS = 'Heterozygous'
-    UNKNOWN = 'Unknown'
+class Zygosity(CaptitalStrEnum):
+    WILDTYPE = auto()
+    HOMOZYGOUS = auto()
+    HETEROZYGOUS = auto()
+    UNKNOWN = auto()
 
 
-class DrugType(Enum):
-    BUPESR = 'BupeSR'
-    BUPIVICIANE = 'Bupivicaine'
-    MELOXICAM = 'Meloxicam'
+class DrugType(UpperStrEnum):
+    BUPESR = auto()
+    BUPIVICIANE = auto()
+    MELOXICAM = auto()
 
 
-class ImplantType(Enum):
-    CANNULA = 'Cannula'
-    OPTO = 'Opto'
-    ELECTRODE = 'Electrode'
-    LENS = 'Lens'
-    FIBER_OPTIC = 'Fiber Optic'
-    PELLET = 'Pellet'
-    MICRO = "Microdialysis"
+class ImplantType(CaptitalStrEnum):
+    CANNULA = auto()
+    OPTO = auto()
+    ELECTRODE = auto()
+    LENS = auto()
+    FIBER_OPTIC = auto()
+    PELLET = auto()
+    MICRO = auto()
 
 
-class Hemisphere(Enum):
-    LEFT = 'Left'
-    RIGHT = 'Right'
-    BILATERAL = 'Bilateral'
+class Hemisphere(CaptitalStrEnum):
+    LEFT = auto()
+    RIGHT = auto()
+    BILATERAL = auto()
 
 
-class InjectionType(Enum):
-    VIRUS = 'Virus'
-    TRACER = 'Tracer'
-    DYE = 'Dye'
-    CYTOTOXIC = 'Cytotoxic'
-    DRUG = 'Drug'
-    OTHER = 'Other'
+class InjectionType(CaptitalStrEnum):
+    VIRUS = auto()
+    TRACER = auto()
+    DYE = auto()
+    CYTOTOXIC = auto()
+    DRUG = auto()
+    OTHER = auto()
 
 
-class NoteType(Enum):
-    SURGERY = 'Surgery'
-    RECOVERY = 'Recovery'
-    EXPERIMENTAL = 'Experimental'
-    POSTMORTEM = 'Postmortem'
-    OTHER = 'Other'
+class NoteType(CaptitalStrEnum):
+    SURGERY = auto()
+    RECOVERY = auto()
+    EXPERIMENTAL = auto()
+    POSTMORTEM = auto()
+    OTHER = auto()
 
 
 class Genotype(Enum):
@@ -87,3 +99,11 @@ class Genotype(Enum):
     ELE = 'Early Life Enrichement'
     ELSDAT = 'Early Life Stress-DAT'
     ELEDAT = 'Early Life Enrichment-DAT'
+
+
+class BrainStructure(UpperStrEnum):
+    VTA = auto()
+    LHA = auto()
+    DLS = auto()
+    DMS = auto()
+    OFC = auto()
