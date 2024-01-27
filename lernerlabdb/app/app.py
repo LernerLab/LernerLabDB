@@ -14,54 +14,60 @@ from abc import ABC, abstractmethod
 #! rework injection and abstracting cards
 
 
-class NavigationCard(ABC):
-    def __init__(self, card_input):
+class InputCard(ABC):
+    def __init__(self, card_input, card_name):
         self._card_input = None
         self.card_name = None
 
-    def create_card_input(self):
-        card_input = ui.nav(self.card_name, self.card_input())
-        return card_input
-
     @property
-    def card(self):
+    def card_input(self):
         if not self._card_input:
             self._card_input = self.create_card_input()
         return self._card_input
 
 
-class MouseNavigationCard(NavigationCard):
+class MouseInputCard(InputCard):
     def __init__(self, mouse_input: MouseInput):
         self._card_input = mouse_input
         self.card_name = "Mouse"
+        
+    def card(self):
 
 
-class AppUI:
-    def __init__(self, navigation_cards: List[NavigationCard]):
+class NavigationCards:
+    def __init__(self, navigation_cards: List[InputCard]):
         self.navigation_cards = navigation_cards
 
     def generate_navigation_cards(self):
-
-        cards = [c.card for c in self.navigation_cards]
-
+        cards = [c.card_input for c in self.navigation_cards]
         return ui.navset_underline(*cards)
 
-    def render_user_interface(self):
+
+class AppUI:
+    def __init__(self, sidebar: Sidebar, navigation_cards: List[NavigationCards]):
+        self.navigation_cards = navigation_cards
+        self.sidebar = sidebar
+
+    @property
+    def user_interface(self):
         return ui.page_fluid(
             shinyswatch.theme.darkly(),
-            Sidebar.sidebar(),
+            self.sidebar.sidebar(),
             ui.markdown("---"),
-            self.generate_navigation_cards()
+            # NavigationCard.navigation_cards(),
         )
 
 
-mouse_card = MouseNavigationCard(MouseInput())
 
-user_interface = AppUI(navigation_cards=[mouse_card])
+
+
 
 
 def server(input: Inputs, output: Outputs, session: Session):
     shinyswatch.theme.darkly()
 
 
-app = App(user_interface.render_user_interface(), server=server)
+app_ui = AppUI(sidebar=Sidebar, navigation_cards=NavigationCards)
+
+
+app = App(app_ui.user_interface, server=server)
