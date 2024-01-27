@@ -10,25 +10,51 @@ from shiny import *
 
 import shinyswatch
 
+class NavigationCards:
+    def __init__(self,
+                mouse_input:MouseInput,
+                surgery_input: SurgeryInput,
+                procedure_input: ProcedureInput):
+    self.mouse_input = mouse_input
+    self._mouse_card = None
+    self.surgery_input = surgery_input
+    self._surgery_card = None
+    self.procedure_input = procedure_input
+    self._procedure_card = None
+    
+    @property
+    def mouse_card(self):
+        if not self._mouse_card:
+            self._mouse_card = ui.nav(
+                    "Mouse",
+                    self.mouse_input.mouse_input()
+                )
+        return self._mouse_card
+    @property
+    def surgery_card(self):
+        if not self._surgery_card:
+            self._surgery_card = ui.nav(
+                    "Surgery",
+                    self.surgery_input.surgery_input()
+                )
+        return self._surgery_card
+    
+    @property
+    def procedure_card(self):
+        if not self._procedure_card:
+            self._procedure_card = ui.nav(
+                    "Procedure",
+                    self.procedure_input.procedure_input()
+                )
+        return self._procedure_card
 
 class AppUI:
+    def __init__(self, navigation_cards: NavigationCards):
+        self.navigation_cards = navigation_cards
 
     def navigation_cards(self):
-        mouse_card = ui.nav(
-            "Mouse",
-            MouseInput().mouse_input()
-        )
 
-        surgery_card = ui.nav(
-            "Surgery",
-            SurgeryInput().surgery_input()
-        )
-
-        procedure_card = ui.nav(
-            "Procedure",
-            ProcedureInput().procedure_input())
-
-        cards = [mouse_card, surgery_card, procedure_card]
+        cards = [self.navigation_cards.mouse_card, surgery_card, procedure_card]
 
         return ui.navset_underline(*cards)
 
@@ -37,7 +63,10 @@ class AppUI:
             shinyswatch.theme.darkly(),
             Sidebar.sidebar(),
             ui.markdown("---"),
-            self.navigation_cards(),
+            self.navigation_cards(mouse_input=MouseInput(),
+                                  surgery_input=SurgeryInput(),
+                                  procedure_input=ProcedureInput()
+                                  )
 
         )
 
