@@ -1,4 +1,5 @@
 from lernerlabdb.interface_modules.enums import *
+from typing import List
 
 from lernerlabdb.input_modules.mouse_input import MouseInput
 from lernerlabdb.input_modules.procedure_input import ProcedureInput
@@ -9,52 +10,38 @@ from lernerlabdb.input_modules.user_input_sidebar import Sidebar
 from shiny import *
 
 import shinyswatch
+from abc import ABC, abstractmethod
 
-class NavigationCards:
-    def __init__(self,
-                mouse_input:MouseInput,
-                surgery_input: SurgeryInput,
-                procedure_input: ProcedureInput):
-    self.mouse_input = mouse_input
-    self._mouse_card = None
-    self.surgery_input = surgery_input
-    self._surgery_card = None
-    self.procedure_input = procedure_input
-    self._procedure_card = None
-    
+
+class NavigationCard(ABC):
+    def __init__(self, card_input):
+        self._card_input = None
+        self.card_name = None
+
+    def create_card_input(self):
+        card_input = ui.nav(self.card_name, self.card_input())
+        return card_input
+
     @property
-    def mouse_card(self):
-        if not self._mouse_card:
-            self._mouse_card = ui.nav(
-                    "Mouse",
-                    self.mouse_input.mouse_input()
-                )
-        return self._mouse_card
-    @property
-    def surgery_card(self):
-        if not self._surgery_card:
-            self._surgery_card = ui.nav(
-                    "Surgery",
-                    self.surgery_input.surgery_input()
-                )
-        return self._surgery_card
-    
-    @property
-    def procedure_card(self):
-        if not self._procedure_card:
-            self._procedure_card = ui.nav(
-                    "Procedure",
-                    self.procedure_input.procedure_input()
-                )
-        return self._procedure_card
+    def card(self):
+        if not self._card_input:
+            self._card_input = self.create_card_input()
+        return self._card_input
+
+
+class MouseNavigationCard(NavigationCard):
+    def __init__(self, mouse_input: MouseInput):
+        self._card_input = mouse_input
+        self.card_name = "Mouse"
+
 
 class AppUI:
-    def __init__(self, navigation_cards: NavigationCards):
+    def __init__(self, navigation_cards: List[NavigationCard]):
         self.navigation_cards = navigation_cards
 
-    def navigation_cards(self):
+    def generate_navigation_cards(self):
 
-        cards = [self.navigation_cards.mouse_card, surgery_card, procedure_card]
+        cards = [c.card for c in self.navigation_cards]
 
         return ui.navset_underline(*cards)
 
@@ -63,15 +50,13 @@ class AppUI:
             shinyswatch.theme.darkly(),
             Sidebar.sidebar(),
             ui.markdown("---"),
-            self.navigation_cards(mouse_input=MouseInput(),
-                                  surgery_input=SurgeryInput(),
-                                  procedure_input=ProcedureInput()
-                                  )
-
+            self.generate_navigation_cards()
         )
 
 
-user_interface = AppUI()
+mouse_card = MouseNavigationCard(MouseInput())
+
+user_interface = AppUI(navigation_cards=[mouse_card])
 
 
 def server(input: Inputs, output: Outputs, session: Session):
