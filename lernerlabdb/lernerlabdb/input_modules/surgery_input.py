@@ -21,9 +21,8 @@ class SurgeryInput:
     
     @property
     def column_layout(self):
-        columns = ui.layout_column_wrap(
-            (self.surgery_date_selector, self.drug_selector),
-            width=1/2
+        columns = ui.column(4,
+            (self.surgery_date_selector, self.drug_selector)
         )
         
         return columns

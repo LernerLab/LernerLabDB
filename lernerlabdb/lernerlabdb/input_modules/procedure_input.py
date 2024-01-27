@@ -1,6 +1,8 @@
 from lernerlabdb.interface_modules.enums import *
 from lernerlabdb.input_modules.note_input import NoteInput
 from lernerlabdb.interface_modules.enums import BrainStructure
+
+from lernerlabdb.input_modules.structure_input import StructureInput
 from shiny import *
 
 
@@ -8,30 +10,24 @@ class ProcedureInput:
 
     @property
     def name_input(self):
-        name_input = ui.input_text("name", "Name")
+        name_input = ui.input_text("name", "Procedure Name")
         return name_input
 
-    @property
-    def structure(self):
-        structure_choices = [s.value for s in BrainStructure]
-        selector = ui.input_selectize(
-            "structure", "Structure", choices=structure_choices)
-
-        return selector
+    def add_structure(self):
+        pass
 
     @property
-    def column_layout(self):
+    def procedure_meta_input_layout(self):
         columns = ui.layout_column_wrap(
-            (self.name_input),
-            (self.structure),
-            width=1/2)
-
+            self.name_input, width=1/2)
         return columns
 
     def procedure_input(self):
 
         procedure_input_form = ui.page_fillable(
-            self.column_layout,
+            self.procedure_meta_input_layout,
+            ui.markdown("---"),
+            StructureInput().structure_input_form,
             ui.markdown("---"),
             NoteInput().display_note_input(),
         )

@@ -47,12 +47,12 @@ class Injection:
     """
 
     def __init__(self,
-                injection_type: InjectionType,
-                substrate: Optional[str] = None,
-                volume: int = 0,
-                flowrate: int = 0,
-                titer: Optional[float] = None,
-                molarity: Optional[float] = None):
+                 injection_type: InjectionType,
+                 substrate: Optional[str] = None,
+                 volume: int = 0,
+                 flowrate: int = 0,
+                 titer: Optional[float] = None,
+                 molarity: Optional[float] = None):
 
         self._injection_type = injection_type
         self.substrate = None if substrate is None else substrate.upper()
@@ -64,7 +64,7 @@ class Injection:
         self.injection_angle = 90
 
     @property
-    def injection_type(self)->str:
+    def injection_type(self) -> str:
         """
         Returns the type of injection
 
@@ -76,13 +76,14 @@ class Injection:
         Pseodo setter for injection_coordinates. Adjusts the coordinates where the injection is applied.
 
         """
-        self.injection_coordinates = Coordinates(ap, ml, dv)
+        self.injection_coordinates = Coordinates(
+            ap, ml, dv)  # ! TODO this should be injected, not created here
 
     @property
     def data(self) -> dict:
         """
         Returns a dictionary representation of the injection data.
-        
+
         """
         data = {
             "substrate": self.substrate,

@@ -4,8 +4,10 @@ from lernerlabdb.interface_modules.enums import NoteType
 
 
 class NoteInput:
-    def __init__(self):
-        pass
+    @property
+    def title(self):
+        title = ui.panel_title("Notes", "notes")
+        return title
 
     @property
     def note_type_selector(self):
@@ -15,11 +17,16 @@ class NoteInput:
 
     @property
     def note_input(self):
-        note_input = ui.input_text_area("note", "Note")
+        note_input = ui.input_text_area("Notes", "notes")
         return note_input
-
-    def display_note_input(self):
+    @property
+    def note_button(self):
         note_button = ui.input_action_button("note_input", "Add Note")
+        return note_button
+    def display_note_input(self):
         note_form = ui.page_fillable(
-            self.note_type_selector, self.note_input, note_button)
+            self.title,
+            self.note_type_selector,
+            self.note_input,
+            self.note_button)
         return note_form
