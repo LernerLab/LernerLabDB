@@ -11,6 +11,7 @@ from shiny import *
 
 import shinyswatch
 from abc import ABC, abstractmethod
+#! rework injection and abstracting cards
 
 
 class NavigationCard(ABC):
