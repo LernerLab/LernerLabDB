@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from shiny import *
 
 
 from lernerlabdb.input_modules.inputs import MouseInput, NoteInput, ProcedureInput, SurgeryInput
