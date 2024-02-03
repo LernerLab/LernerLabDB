@@ -44,6 +44,103 @@ class NoteInput:
         return note_form
 
 
+class CoordinatesInput:
+
+    @property
+    def title(self):
+        title = ui.markdown("#### Coordinates")
+        return title
+
+    def single_input_form(self, name, display):
+        single_input = ui.input_text(id=name, label=display)
+        return single_input
+
+    @property
+    def coordinates_input(self):
+        input_form = ui.row(
+            ui.column(2, self.single_input_form("ap", "AP")),
+            ui.column(2, self.single_input_form("ml", "ML")),
+            ui.column(2, self.single_input_form("dv", "DV"))
+        )
+        return input_form
+
+    @property
+    def coordinates_input_form(self):
+        form = ui.page_fillable(
+            self.title,
+            self.coordinates_input,
+        )
+        return form
+
+
+class StructureInput:
+
+    @property
+    def title(self):
+        title = ui.markdown("### Structure")
+        return title
+
+    @property
+    def structure_selector(self):
+        structure_choices = [s.value for s in BrainStructure]
+        selector = ui.input_selectize(
+            "structure", "Structure", choices=structure_choices)
+
+        return selector
+
+    @property
+    def hemisphere_select(self):
+        hemisphere_choices = [s.value for s in Hemisphere]
+        selector = ui.input_selectize(
+            "hemisphere", "Hemisphere", choices=hemisphere_choices)
+
+        return selector
+
+    @property
+    def implant_selector(self):
+        implant_choices = [i.value for i in ImplantType]
+        selector = ui.input_selectize(
+            "implant", "Implant", choices=implant_choices)
+        return selector
+
+    @property
+    def injection_selector(self):
+        injection_choices = [i.value for i in InjectionType]
+        selector = ui.input_selectize(
+            "injection", "Injection", choices=injection_choices)
+        return selector
+
+    @property
+    def column_layout(self):
+        columns = ui.column(2,
+                            (self.structure_selector, self.hemisphere_select,
+                             CoordinatesInput().coordinates_input_form,
+                             self.implant_selector,
+                             self.injection_selector),
+                            (self.structure_selector, self.hemisphere_select,
+                             CoordinatesInput().coordinates_input_form,
+                             self.implant_selector,
+                             self.injection_selector)
+
+                            )
+        return columns
+    @property
+    def add_structure_button(self):
+        note_button = ui.input_action_button(
+            "add_structure_to_procedure", "Add New Structure To Procdure")
+        return note_button
+
+    @property
+    def structure_input_form(self):
+        structure_input_form = ui.page_fillable(
+            self.title,
+            self.column_layout,
+            self.add_structure_button
+        )
+
+        return structure_input_form
+
+
 class MouseInput:
 
     @property
@@ -88,7 +185,7 @@ class MouseInput:
             (self.status_selector, self.dob_selector,
              self.sex_radio, self.ear_tag_input),
             (self.genotype_selector, self.zygosity_selector),
-            width=1/4)
+            width=1/6)
 
         return columns
 
@@ -118,7 +215,7 @@ class ProcedureInput:
     @property
     def procedure_meta_input_layout(self):
         columns = ui.layout_column_wrap(
-            self.name_input, width=1/2)
+            self.name_input, width=1/6)
         return columns
 
     def procedure_input(self):
@@ -128,52 +225,10 @@ class ProcedureInput:
             ui.markdown("---"),
             StructureInput().structure_input_form,
             ui.markdown("---"),
-            NoteInput().display_note_input(),
+            NoteInput().display_note_input()
         )
 
         return procedure_input_form
-
-
-class StructureInput:
-
-    @property
-    def title(self):
-        title = ui.markdown("### Structure")
-        return title
-
-    @property
-    def structure_selector(self):
-        structure_choices = [s.value for s in BrainStructure]
-        selector = ui.input_selectize(
-            "structure", "Structure", choices=structure_choices)
-
-        return selector
-
-    @property
-    def hemisphere_select(self):
-        hemisphere_choices = [s.value for s in Hemisphere]
-        selector = ui.input_selectize(
-            "hemisphere", "Hemisphere", choices=hemisphere_choices)
-
-        return selector
-
-    @property
-    def column_layout(self):
-        columns = ui.column(4,
-                            (self.structure_selector, self.hemisphere_select,
-                             CoordinatesInput().coordinates_input_form)
-
-                            )
-        return columns
-
-    @property
-    def structure_input_form(self):
-        structure_input_form = ui.page_fillable(
-            self.title,
-            self.column_layout
-        )
-
-        return structure_input_form
 
 
 class SurgeryInput:
@@ -209,32 +264,3 @@ class SurgeryInput:
         )
 
         return surgery_input_form
-
-
-class CoordinatesInput:
-
-    @property
-    def title(self):
-        title = ui.markdown("#### Coordinates")
-        return title
-
-    def single_input_form(self, name, display):
-        single_input = ui.input_text(id=name, label=display)
-        return single_input
-
-    @property
-    def coordinates_input(self):
-        input_form = ui.row(
-            ui.column(2, self.single_input_form("ap", "AP")),
-            ui.column(2, self.single_input_form("ml", "ML")),
-            ui.column(2, self.single_input_form("dv", "DV"))
-        )
-        return input_form
-
-    @property
-    def coordinates_input_form(self):
-        form = ui.page_fillable(
-            self.title,
-            self.coordinates_input,
-        )
-        return form

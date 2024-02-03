@@ -50,13 +50,14 @@ class DrugType(UpperStrEnum):
 
 
 class ImplantType(CaptitalStrEnum):
+    NONE = auto()
     CANNULA = auto()
-    OPTO = auto()
     ELECTRODE = auto()
-    LENS = auto()
     FIBER_OPTIC = auto()
-    PELLET = auto()
+    LENS = auto()
     MICRO = auto()
+    OPTO = auto()
+    PELLET = auto()
 
 
 class Hemisphere(CaptitalStrEnum):
@@ -66,11 +67,12 @@ class Hemisphere(CaptitalStrEnum):
 
 
 class InjectionType(CaptitalStrEnum):
-    VIRUS = auto()
-    TRACER = auto()
-    DYE = auto()
+    NONE = auto()
     CYTOTOXIC = auto()
     DRUG = auto()
+    DYE = auto()
+    TRACER = auto()
+    VIRUS = auto()
     OTHER = auto()
 
 

@@ -52,6 +52,7 @@ class ProcedureCard(InputCard):
         )
         return card
 
+    
 
 class NavigationCards:
     def __init__(self):

@@ -10,7 +10,7 @@ from shiny import *
 
 import shinyswatch
 from abc import ABC, abstractmethod
-#! rework injection and abstracting cards
+
 
 
 class AppUI:
@@ -21,7 +21,7 @@ class AppUI:
     @property
     def user_interface(self):
         return ui.page_fluid(
-            shinyswatch.theme.darkly(),
+            # shinyswatch.theme.darkly(),
             self.sidebar.sidebar(),
             ui.markdown("---"),
             self.navigation_cards.cards
@@ -29,7 +29,7 @@ class AppUI:
 
 
 def server(input: Inputs, output: Outputs, session: Session):
-    shinyswatch.theme.darkly()
+    pass
 
 
 nav_cards = NavigationCards()
