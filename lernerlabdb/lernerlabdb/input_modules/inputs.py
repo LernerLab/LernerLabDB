@@ -112,11 +112,7 @@ class StructureInput:
 
     @property
     def column_layout(self):
-        columns = ui.column(2,
-                            (self.structure_selector, self.hemisphere_select,
-                             CoordinatesInput().coordinates_input_form,
-                             self.implant_selector,
-                             self.injection_selector),
+        columns = ui.column(1,
                             (self.structure_selector, self.hemisphere_select,
                              CoordinatesInput().coordinates_input_form,
                              self.implant_selector,
@@ -124,6 +120,7 @@ class StructureInput:
 
                             )
         return columns
+
     @property
     def add_structure_button(self):
         note_button = ui.input_action_button(
@@ -134,8 +131,7 @@ class StructureInput:
     def structure_input_form(self):
         structure_input_form = ui.page_fillable(
             self.title,
-            self.column_layout,
-            self.add_structure_button
+            self.column_layout
         )
 
         return structure_input_form
