@@ -4,6 +4,7 @@ from shiny import *
 
 from lernerlabdb.input_modules.inputs import MouseInput, NoteInput, ProcedureInput, SurgeryInput
 
+
 class InputCard(ABC):
     @abstractmethod
     def __init__(self):
@@ -18,7 +19,7 @@ class MouseInputCard(InputCard):
 
     @property
     def card(self):
-        card = ui.nav(
+        card = ui.nav_panel(
             self.card_name,
             self.card_input.mouse_input()
         )
@@ -32,7 +33,7 @@ class SurgeryCard(InputCard):
 
     @property
     def card(self):
-        card = ui.nav(
+        card = ui.nav_panel(
             self.card_name,
             self.card_input.surgery_input()
         )
@@ -46,13 +47,12 @@ class ProcedureCard(InputCard):
 
     @property
     def card(self):
-        card = ui.nav(
+        card = ui.nav_panel(
             self.card_name,
             self.card_input.procedure_input()
         )
         return card
 
-    
 
 class NavigationCards:
     def __init__(self):
