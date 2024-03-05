@@ -224,9 +224,8 @@ class ProcedureInput:
 
     @property
     def procedure_structures_columns(self):
-        cols = list()
-        for i in range(self._num_structures):
-            cols.append(StructureInput().structure_input_form(i))
+        cols = [StructureInput().structure_input_form(i)
+                for i in range(self._num_structures)]
         input_cols = ui.layout_columns(*cols)
         return input_cols
 
