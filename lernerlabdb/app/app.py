@@ -17,12 +17,15 @@ def server(input: Inputs, output: Outputs, session: Session):
     pass
 
 
-nav_cards = NavigationCards()
-nav_cards.create_nav_cards(MouseInputCard(card_input=MouseInput()),
-                           SurgeryCard(card_input=SurgeryInput()),
-                           ProcedureCard(card_input=ProcedureInput())
-                           )
-app_ui = AppUI(sidebar=Sidebar, navigation_cards=nav_cards)
+def main():
+
+    nav_cards = NavigationCards()
+    nav_cards.create_nav_cards(MouseInputCard(card_input=MouseInput()),
+                               SurgeryCard(card_input=SurgeryInput()),
+                               ProcedureCard(card_input=ProcedureInput())
+                               )
+    app_ui = AppUI(sidebar=Sidebar, navigation_cards=nav_cards)
+    return App(app_ui.user_interface, server=server)
 
 
-app = App(app_ui.user_interface, server=server)
+app = main()
