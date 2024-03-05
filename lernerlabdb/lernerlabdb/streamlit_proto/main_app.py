@@ -44,7 +44,7 @@ class MainApp:
             structure_col, injection_col, implant_col = st.columns(3)
             with structure_col:
                 structure_col.markdown("""
-                          ### Structure 
+                          ### Structure
                           ____
                            """)
                 structure_col.text_input("Structure Name")
@@ -60,7 +60,7 @@ class MainApp:
             # INJECTION COLUMNS
             with injection_col:
                 injection_col.markdown("""
-                          ### Injection 
+                          ### Injection
                           ____
                            """)
                 injection_col.selectbox("Injection Type", [

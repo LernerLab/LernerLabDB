@@ -75,10 +75,9 @@ class CoordinatesInput:
 
 class StructureInput:
 
-    @property
-    def title(self):
-        title = ui.markdown("### Structure")
-        return title
+    def __init__(self):
+        self._numb_structure_input_columns = 1
+        self._structure_input_columns = None
 
     @property
     def structure_selector(self):
@@ -111,27 +110,37 @@ class StructureInput:
         return selector
 
     @property
-    def column_layout(self):
-        columns = ui.column(1,
-                            (self.structure_selector, self.hemisphere_select,
-                             CoordinatesInput().coordinates_input_form,
-                             self.implant_selector,
-                             self.injection_selector)
+    def single_structure_input_column(self):
+        single_input = (self.structure_selector, self.hemisphere_select,
+                        CoordinatesInput().coordinates_input_form,
+                        self.implant_selector,
+                        self.injection_selector)
+        return single_input
 
-                            )
+    @property
+    def structure_input_columns(self):
+        if not self._structure_input_columns:
+            self._structure_input_columns = [
+                self.single_structure_input_column]
+        return self._structure_input_columns
+
+    @structure_input_columns.setter
+    def structure_input_columns(self, value):
+        self._structure_input_columns = value
+
+    @property
+    def structure_input_column_layout(self):
+        columns = ui.layout_column_wrap(
+            *self.structure_input_columns
+        )
         return columns
 
-    @property
-    def add_structure_button(self):
-        note_button = ui.input_action_button(
-            "add_structure_to_procedure", "Add New Structure To Procdure")
-        return note_button
+    def structure_input_form(self, numb):
 
-    @property
-    def structure_input_form(self):
         structure_input_form = ui.page_fillable(
-            self.title,
-            self.column_layout
+            ui.panel_title(f'Structure {numb+1}'),
+            self.structure_input_column_layout,
+            # self.add_structure_button
         )
 
         return structure_input_form
@@ -188,7 +197,6 @@ class MouseInput:
     def mouse_input(self):
 
         mouse_button = ui.input_action_button("mouse_input", "Add Mouse")
-
         mouse_form = ui.page_fillable(
             self.column_layout,
             ui.markdown("---"),
@@ -199,14 +207,14 @@ class MouseInput:
 
 
 class ProcedureInput:
+    def __init__(self, num_structures=4):
+        self._strucutre_inputs = None
+        self._num_structures = num_structures
 
     @property
     def name_input(self):
         name_input = ui.input_text("name", "Procedure Name")
         return name_input
-
-    def add_structure(self):
-        pass
 
     @property
     def procedure_meta_input_layout(self):
@@ -214,12 +222,20 @@ class ProcedureInput:
             self.name_input, width=1/6)
         return columns
 
+    @property
+    def procedure_structures_columns(self):
+        cols = list()
+        for i in range(self._num_structures):
+            cols.append(StructureInput().structure_input_form(i))
+        input_cols = ui.layout_columns(*cols)
+        return input_cols
+
     def procedure_input(self):
 
         procedure_input_form = ui.page_fillable(
             self.procedure_meta_input_layout,
             ui.markdown("---"),
-            StructureInput().structure_input_form,
+            self.procedure_structures_columns,
             ui.markdown("---"),
             NoteInput().display_note_input()
         )

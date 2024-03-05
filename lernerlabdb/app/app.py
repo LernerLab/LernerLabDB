@@ -10,7 +10,7 @@ from shiny import *
 
 import shinyswatch
 from abc import ABC, abstractmethod
-
+from shiny import Session
 
 
 class AppUI:
@@ -27,8 +27,12 @@ class AppUI:
             self.navigation_cards.cards
         )
 
+    class Outputs:
+        pass
+
 
 def server(input: Inputs, output: Outputs, session: Session):
+    # inputs.
     pass
 
 
