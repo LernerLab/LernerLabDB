@@ -1,16 +1,5 @@
-from lernerlabdb.interface_modules.coordinates import Coordinates
-from lernerlabdb.interface_modules.drug import Drug
-from lernerlabdb.interface_modules.enums import BrainStructure, Hemisphere
-from lernerlabdb.interface_modules.structure import Structure
-
-from lernerlabdb.interface_modules.enums import BrainStructure
-
+from lernerlabdb.interface_modules import Coordinates, Drug, BrainStructure, Hemisphere, Structure, ImplantType, InjectionType, NoteType, Sex, Genotype, Zygosity, DrugType
 from shiny import *
-
-from lernerlabdb.interface_modules.enums import *
-
-
-from lernerlabdb.interface_modules.enums import NoteType
 
 
 class NoteInput:
@@ -28,6 +17,7 @@ class NoteInput:
     @property
     def note_input(self):
         note_input = ui.input_text_area("Notes", "notes")
+
         return note_input
 
     @property
@@ -230,7 +220,6 @@ class ProcedureInput:
         return input_cols
 
     def procedure_input(self):
-
         procedure_input_form = ui.page_fillable(
             self.procedure_meta_input_layout,
             ui.markdown("---"),

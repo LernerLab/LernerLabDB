@@ -8,7 +8,6 @@ from lernerlabdb.customs.custom_types import Date, Time, NumberOfDays, NumberOfW
 from lernerlabdb.interface_modules.enums import CageStatus, Location, Sex, Genotype
 
 
-
 class Cage:
     # write a docstring for this class
 

@@ -5,7 +5,7 @@ from lernerlabdb.customs.custom_types import Date, Time, NumberOfDays, NumberOfW
 from lernerlabdb.interface_modules.cage import Cage
 from lernerlabdb.interface_modules.surgery import Surgery
 from lernerlabdb.interface_modules.note import Note
-from lernerlabdb.interface_modules.experimentalData import ExperimentalData
+from lernerlabdb.interface_modules.experimentaldata import ExperimentalData
 from lernerlabdb.interface_modules.scientist import Scientist
 from lernerlabdb.interface_modules.enums import Sex, Zygosity, MouseStatus, Genotype
 
