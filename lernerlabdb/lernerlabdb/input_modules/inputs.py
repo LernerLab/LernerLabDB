@@ -1,8 +1,20 @@
+from typing import Protocol
 from lernerlabdb.interface_modules import Coordinates, Drug, BrainStructure, Hemisphere, Structure, ImplantType, InjectionType, NoteType, Sex, Genotype, Zygosity, DrugType
 from shiny import *
+import pretty_errors
 
 
-class NoteInput:
+class DynamicInputs:
+    @staticmethod
+    def input_selector(id: str, label: str, choices: range):
+        return ui.input_select(id, label, choices=[i+1 for i in choices])
+
+
+class UserInput(Protocol):
+    """Protocol for User Input classes"""
+
+
+class NoteInput(UserInput):
     @property
     def title(self):
         title = ui.panel_title("Notes", "notes")
@@ -34,7 +46,7 @@ class NoteInput:
         return note_form
 
 
-class CoordinatesInput:
+class CoordinatesInput(UserInput):
 
     @property
     def title(self):
@@ -63,7 +75,7 @@ class CoordinatesInput:
         return form
 
 
-class StructureInput:
+class StructureInput(UserInput):
 
     def __init__(self):
         self._numb_structure_input_columns = 1
@@ -136,7 +148,7 @@ class StructureInput:
         return structure_input_form
 
 
-class MouseInput:
+class MouseInput(UserInput):
 
     @property
     def dob_selector(self):
@@ -177,10 +189,11 @@ class MouseInput:
     @property
     def column_layout(self):
         columns = ui.layout_column_wrap(
-            (self.status_selector, self.dob_selector,
+            (self.dob_selector,
+             self.status_selector,
              self.sex_radio, self.ear_tag_input),
             (self.genotype_selector, self.zygosity_selector),
-            width=1/6)
+            width=1/4)
 
         return columns
 
@@ -196,42 +209,34 @@ class MouseInput:
         return mouse_form
 
 
-class ProcedureInput:
-    def __init__(self, num_structures=4):
+class ProcedureInput(UserInput):
+    def __init__(self):
         self._strucutre_inputs = None
-        self._num_structures = num_structures
 
     @property
     def name_input(self):
-        name_input = ui.input_text("name", "Procedure Name")
+        name_input = ui.input_text("name", "Procedure Name ")
         return name_input
 
     @property
     def procedure_meta_input_layout(self):
         columns = ui.layout_column_wrap(
-            self.name_input, width=1/6)
+            self.name_input,
+            width=1/6)
         return columns
-
-    @property
-    def procedure_structures_columns(self):
-        cols = [StructureInput().structure_input_form(i)
-                for i in range(self._num_structures)]
-        input_cols = ui.layout_columns(*cols)
-        return input_cols
 
     def procedure_input(self):
         procedure_input_form = ui.page_fillable(
             self.procedure_meta_input_layout,
             ui.markdown("---"),
-            self.procedure_structures_columns,
-            ui.markdown("---"),
+            ui.output_ui('procedure_structures_columns'),
             NoteInput().display_note_input()
         )
 
         return procedure_input_form
 
 
-class SurgeryInput:
+class SurgeryInput(UserInput):
 
     @property
     def surgery_date_selector(self):
