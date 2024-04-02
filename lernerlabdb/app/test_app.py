@@ -1,9 +1,10 @@
 import numpy as np
 from shiny import App, Inputs, Outputs, Session, reactive, req, ui, render
 from lernerlabdb.input_modules import StructureInput, NoteInput, ProcedureInput
+import pretty_errors
 
 
-class AppUI(Inputs):
+class AppUI:
     @property
     def app_ui(self):
         app_ui_page = ui.page_fluid(
@@ -25,5 +26,5 @@ def server(input, output, session):
         return procedure_input.procedure_input()
 
 
-app_ui = AppUI.app_ui
+app_ui = AppUI().app_ui
 app = App(app_ui, server)
