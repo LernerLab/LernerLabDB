@@ -193,7 +193,8 @@ class MouseInput(UserInput):
              self.status_selector,
              self.sex_radio, self.ear_tag_input),
             (self.genotype_selector, self.zygosity_selector),
-            width=1/4)
+            widht=1/4
+        )
 
         return columns
 
@@ -203,7 +204,7 @@ class MouseInput(UserInput):
         mouse_form = ui.page_fillable(
             self.column_layout,
             ui.markdown("---"),
-            NoteInput().display_note_input(),
+            # NoteInput().display_note_input(),
             mouse_button)
 
         return mouse_form
@@ -222,15 +223,18 @@ class ProcedureInput(UserInput):
     def procedure_meta_input_layout(self):
         columns = ui.layout_column_wrap(
             self.name_input,
-            width=1/6)
+            ui.input_select("numb_structures", "Number of structures in procedure",
+                            choices=[i for i in range(1, 11, 1)]
+                            ),
+            width=1/3)
         return columns
 
     def procedure_input(self):
         procedure_input_form = ui.page_fillable(
             self.procedure_meta_input_layout,
+            ui.output_ui("procedure_structures_columns"),
             ui.markdown("---"),
-            ui.output_ui('procedure_structures_columns'),
-            NoteInput().display_note_input()
+            # NoteInput().display_note_input()
         )
 
         return procedure_input_form
@@ -265,7 +269,7 @@ class SurgeryInput(UserInput):
         surgery_input_form = ui.page_fillable(
             self.column_layout,
             ui.markdown("---"),
-            NoteInput().display_note_input(),
+            # NoteInput().display_note_input(),
         )
 
         return surgery_input_form

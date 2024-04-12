@@ -1,7 +1,6 @@
 from lernerlabdb.input_modules.user_input_sidebar import Sidebar
 from shiny import *
 
-from lernerlabdb.input_modules.navigation_cards import NavigationCards, MouseInputCard, SurgeryCard, ProcedureCard
 from lernerlabdb.input_modules.inputs import MouseInput, NoteInput, ProcedureInput, SurgeryInput
 
 
