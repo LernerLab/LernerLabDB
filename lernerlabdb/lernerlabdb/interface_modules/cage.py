@@ -1,6 +1,5 @@
 
 import pandas as pd
-import gspread
 from datetime import datetime, date, time, timedelta
 from typing import Dict, Any, Optional, Literal, NewType
 
