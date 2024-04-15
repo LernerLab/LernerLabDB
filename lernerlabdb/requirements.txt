@@ -1,7 +1,4 @@
-#local packages
-./lernerlabdb/lernerlabdb
 
-#publics
 
 aiohttp @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_76kcgwehai/croot/aiohttp_1694181098663/work
 aiosignal @ file:///home/conda/feedstock_root/build_artifacts/aiosignal_1667935791922/work
