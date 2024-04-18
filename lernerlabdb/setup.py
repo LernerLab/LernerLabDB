@@ -10,7 +10,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [ ]
+requirements = []
 
 test_requirements = ['pytest>=3', ]
 
@@ -31,7 +31,7 @@ setup(
     description="source code for lerner lab database managment system",
     install_requires=requirements,
     license="MIT license",
-    long_description=readme + '\n\n' + history,
+    # long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='lernerlabdb',
     name='lernerlabdb',
