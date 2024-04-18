@@ -112,11 +112,16 @@ class StructureInput(UserInput):
         return selector
 
     @property
+    def substrate_input(self):
+        return ui.input_text("substrate_input", "Substrate Input")
+
+    @property
     def single_structure_input_column(self):
         single_input = (self.structure_selector, self.hemisphere_select,
                         CoordinatesInput().coordinates_input_form,
                         self.implant_selector,
-                        self.injection_selector)
+                        self.injection_selector,
+                        self.substrate_input)
         return single_input
 
     @property
@@ -142,7 +147,6 @@ class StructureInput(UserInput):
         structure_input_form = ui.page_fillable(
             ui.panel_title(f'Structure {numb+1}'),
             self.structure_input_column_layout,
-            # self.add_structure_button
         )
 
         return structure_input_form
@@ -193,7 +197,7 @@ class MouseInput(UserInput):
              self.status_selector,
              self.sex_radio, self.ear_tag_input),
             (self.genotype_selector, self.zygosity_selector),
-            widht=1/4
+            widht=1/6
         )
 
         return columns

@@ -9,12 +9,13 @@ import shinyswatch
 from abc import ABC, abstractmethod
 
 # create sidebar
-sidebar = sidebar()
+# sidebar = sidebar()
 
 # create input panels
 mouse_input = MouseInput()
 surgery_input = SurgeryInput()
 procedure_input = ProcedureInput()
+notes_input = NoteInput()
 
 # create navigation panels
 mouse_panel = create_mouse_panel(mouse_input)
@@ -38,6 +39,7 @@ app_ui = ui.page_fluid(
     ui.markdown("# Lerner Lab Database"),
     ui.markdown("---"),
     navigation_cards,
+    notes_input.display_note_input()
 )
 
 # default at 0/1 use reactive event to update ui.input
