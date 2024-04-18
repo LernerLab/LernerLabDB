@@ -1,4 +1,3 @@
-
 anyio==4.3.0
 appdirs==1.4.4
 asgiref==3.8.1
@@ -8,8 +7,7 @@ exceptiongroup==1.2.0
 h11==0.14.0
 htmltools==0.5.1
 idna==3.7
--e git+https://github.com/LernerLab/LernerLabDB.git@6fdaa05e14787a6676f5d21aa0e4b06e5ec01aef#egg=lernerlabdb&subdirectory=lernerlabdb
--t ./lernerlabdb
+-e git+https://github.com/LernerLab/LernerLabDB.git@0762595bcf877f2e44bc0ddd57354a03da5fe164#egg=lernerlabdb&subdirectory=lernerlabdb
 linkify-it-py==2.0.3
 markdown-it-py==3.0.0
 mdit-py-plugins==0.4.0
@@ -19,12 +17,15 @@ packaging==24.0
 pandas==2.2.2
 pretty-errors==1.2.25
 prompt-toolkit==3.0.36
+PyJWT==2.8.0
 python-dateutil==2.9.0.post0
 python-multipart==0.0.9
 pytz==2024.1
 questionary==2.0.1
-shiny==0.8.1
-shinyswatch==0.5.1
+rsconnect_python==1.23.0
+semver==2.13.0
+shiny==0.9.0
+shinyswatch==0.6.0
 six==1.16.0
 sniffio==1.3.1
 starlette==0.37.2

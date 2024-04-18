@@ -5,7 +5,7 @@ from typing import List
 from lernerlabdb.input_modules import *
 from shiny import *
 
-import shinyswatch
+# import shinyswatch
 from abc import ABC, abstractmethod
 
 # create sidebar
@@ -34,7 +34,7 @@ navigation_cards = create_navigation_cards(
 
 app_ui = ui.page_fluid(
     # sidebar,
-    shinyswatch.theme_picker_ui(),
+    # shinyswatch.theme_picker_ui(),
     # shinyswatch.theme.minty(),
     ui.markdown("# Lerner Lab Database"),
     ui.markdown("---"),
@@ -47,7 +47,7 @@ app_ui = ui.page_fluid(
 
 
 def server(input: Inputs, output: Outputs, session: Session):
-    shinyswatch.theme_picker_server()
+    # shinyswatch.theme_picker_server()
 
     @render.ui
     # @reactive.event(input.add)

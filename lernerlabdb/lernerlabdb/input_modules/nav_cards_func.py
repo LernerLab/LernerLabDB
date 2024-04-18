@@ -1,5 +1,5 @@
 from shiny import *
-from lernerlabdb.input_modules import MouseInput, NoteInput, ProcedureInput, SurgeryInput
+from lernerlabdb.input_modules import MouseInput, ProcedureInput, SurgeryInput
 
 
 """ side bar functions """
