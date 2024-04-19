@@ -36,7 +36,7 @@ app_ui = ui.page_fluid(
 
     # shinyswatch.theme_picker_ui,
     shinyswatch.theme.minty,
-    ui.markdown("# LernerLab "),
+    ui.markdown("# LernerLab test save"),
     # ui.input_action_button('click_me', "Click me!"),
     # ui.output_ui('say_thanks')
     ui.markdown("---"),
