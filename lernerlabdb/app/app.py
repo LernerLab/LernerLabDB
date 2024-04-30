@@ -60,7 +60,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.ui
     def procedure_structures_columns():
         number_of_structure_inputs = int(input.numb_structures())
-        columns = [StructureInput().structure_input_form(numb)
+        columns = [StructureInput(numb).structure_input_form()
                    for numb in range(number_of_structure_inputs)
                    ]
         input_columns = ui.TagList(ui.layout_columns(*columns))

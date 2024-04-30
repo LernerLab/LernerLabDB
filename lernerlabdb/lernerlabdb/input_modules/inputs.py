@@ -47,6 +47,8 @@ class NoteInput(UserInput):
 
 
 class CoordinatesInput(UserInput):
+    def __init__(self, coordinates_number):
+        self.coordinates_number = coordinates_number
 
     @property
     def title(self):
@@ -60,9 +62,14 @@ class CoordinatesInput(UserInput):
     @property
     def coordinates_input(self):
         input_form = ui.row(
-            ui.column(2, self.single_input_form("ap", "AP")),
-            ui.column(2, self.single_input_form("ml", "ML")),
-            ui.column(2, self.single_input_form("dv", "DV"))
+            ui.column(4, self.single_input_form(
+                f"ap_{self.coordinates_number}", "AP")),
+            ui.column(4, self.single_input_form(
+                f"ml_{self.coordinates_number}", "ML")),
+            ui.column(4, self.single_input_form(
+                f"dv_{self.coordinates_number}", "DV")),
+            ui.column(4, self.single_input_form(
+                f"angle_{self.coordinates_number}", "Angle"))
         )
         return input_form
 
@@ -77,15 +84,15 @@ class CoordinatesInput(UserInput):
 
 class StructureInput(UserInput):
 
-    def __init__(self):
-        self._numb_structure_input_columns = 1
+    def __init__(self, structure_number=1):
+        self.structure_number = structure_number+1
         self._structure_input_columns = None
 
     @property
     def structure_selector(self):
         structure_choices = [s.value for s in BrainStructure]
         selector = ui.input_selectize(
-            "structure", "Structure", choices=structure_choices)
+            f"structure_{self.structure_number}", "Structure", choices=structure_choices)
 
         return selector
 
@@ -93,7 +100,7 @@ class StructureInput(UserInput):
     def hemisphere_select(self):
         hemisphere_choices = [s.value for s in Hemisphere]
         selector = ui.input_selectize(
-            "hemisphere", "Hemisphere", choices=hemisphere_choices)
+            f"hemisphere_{self.structure_number}", "Hemisphere", choices=hemisphere_choices)
 
         return selector
 
@@ -101,24 +108,25 @@ class StructureInput(UserInput):
     def implant_selector(self):
         implant_choices = [i.value for i in ImplantType]
         selector = ui.input_selectize(
-            "implant", "Implant", choices=implant_choices)
+            f"implant_{self.structure_number}", "Implant", choices=implant_choices)
         return selector
 
     @property
     def injection_selector(self):
         injection_choices = [i.value for i in InjectionType]
         selector = ui.input_selectize(
-            "injection", "Injection", choices=injection_choices)
+            f"injection_{self.structure_number}", "Injection", choices=injection_choices)
         return selector
 
     @property
     def substrate_input(self):
-        return ui.input_text("substrate_input", "Substrate Input")
+        return ui.input_text(f"substrate_input_{self.structure_number}", "Substrate Input")
 
     @property
     def single_structure_input_column(self):
         single_input = (self.structure_selector, self.hemisphere_select,
-                        CoordinatesInput().coordinates_input_form,
+                        CoordinatesInput(
+                            self.structure_number).coordinates_input_form,
                         self.implant_selector,
                         self.injection_selector,
                         self.substrate_input)
@@ -142,10 +150,10 @@ class StructureInput(UserInput):
         )
         return columns
 
-    def structure_input_form(self, numb):
+    def structure_input_form(self):
 
         structure_input_form = ui.page_fillable(
-            ui.panel_title(f'Structure {numb+1}'),
+            ui.panel_title(f'Structure {self.structure_number}'),
             self.structure_input_column_layout,
         )
 

@@ -4,7 +4,7 @@ from typing import Dict
 class Coordinates:
     """
     a class to represent coordinates of a brain structure
-    
+
     Parameters
     ----------
     ap : float default 0.
@@ -13,7 +13,7 @@ class Coordinates:
         Mediolateral coordinate
     dv : float
         Dorsoventral coordinate
-        
+
     Attributes
     ----------
     ap : float
@@ -24,7 +24,7 @@ class Coordinates:
         Dorsoventral coordinate
     coordinates : Dict[str, float]
         A dictionary containing the all coordinates of the structure
-    
+
     Examples
     --------
     >>> coordinates = Coordinates(1, 2, 3)
@@ -33,15 +33,17 @@ class Coordinates:
 
     """
 
-    def __init__(self, ap=0., ml=0., dv=0.):
+    def __init__(self, ap=0., ml=0., dv=0., angle=0.):
         self.ap = ap
         self.ml = ml
         self.dv = dv
+        self.angle = angle
 
     @property
     def coordinates(self) -> Dict[str, float]:
         """
         returns a dictionary of all coordinates
         """
-        coordinates = {"AP": self.ap, "ML": self.ml, "DV": self.dv}
+        coordinates = {"AP": self.ap, "ML": self.ml,
+                       "DV": self.dv, 'Angle': self.angle}
         return coordinates
