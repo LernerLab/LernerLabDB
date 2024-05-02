@@ -1,21 +1,7 @@
 
 import pytest
 from datetime import datetime, date, time, timedelta
-
-from lernerlabdb.interface_modules.Cage import Cage
-from lernerlabdb.interface_modules.Coordinates import Coordinates
-from lernerlabdb.interface_modules.Drug import Drug
-from lernerlabdb.interface_modules.Experiment import Experiment
-from lernerlabdb.interface_modules.Implant import Implant
-from lernerlabdb.interface_modules.Mouse import Mouse
-from lernerlabdb.interface_modules.Note import Note
-from lernerlabdb.interface_modules.Scientist import Scientist
-from lernerlabdb.interface_modules.Structure import Structure
-from lernerlabdb.interface_modules.Surgery import Surgery
-from lernerlabdb.interface_modules.Injection import Injection
-from lernerlabdb.interface_modules.Project import Project
-from lernerlabdb.interface_modules.Procedure import Procedure
-
+from lernerlabdb.interface_modules import *
 from lernerlabdb.interface_modules.enums import *
 
 
